@@ -1,10 +1,10 @@
 ---
 - name: CCNP ENARSI Lab Manual Routers
-  hosts: routers
+  hosts: RTR1
   gather_facts: False
   strategy: free
   vars_files:
-    - ./labs/{{ lab }}/{{ inventory_hostname}}.yaml
+    - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
   roles:
   - enable_interfaces
   - rtr_interfaces
@@ -15,7 +15,7 @@
   gather_facts: False
   strategy: free
   vars_files:
-    - ./labs/{{ lab }}/{{ inventory_hostname}}.yaml
+    - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
   roles:
   - role: enable_interfaces
   - role: vlans
