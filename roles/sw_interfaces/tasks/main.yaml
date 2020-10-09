@@ -21,3 +21,18 @@
   loop_control:
     label: "{{ item.name }}"
   when: "item.mode is defined and item.mode == 'trunk'"
+
+- name: enable ip routing on switches
+  cisco.ios.ios_config:
+    lines: ip routing
+
+- name: configure layer 3 switchports
+  cisco.ios.ios_config:
+    lines:
+    - no switchport
+    - ip address {{ item.ip_address | ansible.netcommon.ipaddr('address') }} {{ item.ip_address | ansible.netcommon.ipaddr('netmask') }}
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:  "item.mode is defined and item.mode == 'l3'"

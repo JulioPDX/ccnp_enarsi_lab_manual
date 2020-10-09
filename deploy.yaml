@@ -1,18 +1,23 @@
 ---
-# - name: CCNP ENARSI Lab Manual 2.1.2
-#   hosts: routers
-#   gather_facts: False
-#   strategy: free
-#   roles:
-#   - enable_interfaces
-#   - rtr_interfaces
-#   - dhcp_config
-
-- name: CCNP ENARSI Lab Manual 2.1.2
-  hosts: D1
+- name: CCNP ENARSI Lab Manual Routers
+  hosts: routers
   gather_facts: False
   strategy: free
+  vars_files:
+    - ./labs/{{ lab }}/{{ inventory_hostname}}.yaml
   roles:
-  # - enable_interfaces
-  # - vlans
-  - l2_interfaces
+  - enable_interfaces
+  - rtr_interfaces
+  - dhcp_config
+
+- name: CCNP ENARSI Lab Manual Switches
+  hosts: switches
+  gather_facts: False
+  strategy: free
+  vars_files:
+    - ./labs/{{ lab }}/{{ inventory_hostname}}.yaml
+  roles:
+  - role: enable_interfaces
+  - role: vlans
+    when: vlans is defined
+  - role: sw_interfaces
