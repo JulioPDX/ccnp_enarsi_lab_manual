@@ -7,4 +7,4 @@
   loop: "{{ dhcp_pools }}"
   loop_control:
     label: "DHCP POOL {{ item.name }}"
-  when: sub_interfaces is defined
+  when: dhcp_pools is defined
