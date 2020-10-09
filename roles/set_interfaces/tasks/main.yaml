@@ -1,4 +1,4 @@
-- name: enable interfaces
+- name: enable or disable interfaces
   cisco.ios.ios_interfaces:
     config:
     - name: "{{ item.name }}"

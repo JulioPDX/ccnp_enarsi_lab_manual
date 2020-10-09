@@ -1,0 +1,7 @@
+- name: configure current lab banner
+  cisco.ios.ios_banner:
+    banner: motd
+    text: |
+      {{ inventory_hostname }} is currently configured
+      for lab {{ lab }}
+    state: present

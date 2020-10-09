@@ -6,7 +6,8 @@
   vars_files:
     - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
   roles:
-  - enable_interfaces
+  - banner
+  - set_interfaces
   - rtr_interfaces
   - dhcp_config
 
@@ -17,7 +18,8 @@
   vars_files:
     - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
   roles:
-  - role: enable_interfaces
+  - role: banner
+  - role: set_interfaces
   - role: vlans
     when: vlans is defined
   - role: sw_interfaces
