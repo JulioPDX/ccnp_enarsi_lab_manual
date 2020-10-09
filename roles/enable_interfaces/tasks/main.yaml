@@ -1,0 +1,8 @@
+- name: enable interfaces
+  cisco.ios.ios_interfaces:
+    config:
+    - name: "{{ item.name }}"
+      enabled: "{{ item.enabled | default('yes') }}"
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"

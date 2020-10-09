@@ -1,0 +1,21 @@
+- name: configure L3 interfaces that are not subinterfaces
+  cisco.ios.ios_l3_interfaces:
+    config:
+    - name: "{{ item.name }}"
+      ipv4:
+      - address: "{{ item.ip_address }}"
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: item.sub_int == False
+
+- name: configure sub interfaces
+  cisco.ios.ios_config:
+    lines:
+    - encapsulation dot1q {{ item.encap }}
+    - ip address {{ item.ip_address | ansible.netcommon.ipaddr('address') }} {{ item.ip_address | ansible.netcommon.ipaddr('netmask') }}
+    parents: interface {{ item.name }}
+  loop: "{{ sub_interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: sub_interfaces is defined

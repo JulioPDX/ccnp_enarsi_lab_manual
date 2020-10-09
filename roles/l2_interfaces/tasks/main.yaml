@@ -1,0 +1,23 @@
+- name: configure access ports
+  cisco.ios.ios_config:
+    lines:
+    - switchport mode access
+    - switchport access vlan {{ item.access_vlan }}
+    - spanning-tree portfast
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: "item.mode is defined and item.mode == 'access'"
+
+- name: configure trunk interfaces
+  cisco.ios.ios_l2_interfaces:
+    config:
+    - name: "{{ item.name }}"
+      mode: trunk
+      trunk:
+        encapsulation: dot1q
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: "item.mode is defined and item.mode == 'trunk'"

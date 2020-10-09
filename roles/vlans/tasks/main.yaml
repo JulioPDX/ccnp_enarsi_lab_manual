@@ -1,0 +1,8 @@
+- name: configure switch VLANs
+  cisco.ios.ios_vlans:
+    config:
+    - name: "{{ item.name }}"
+      vlan_id: "{{ item.id }}"
+      state: active
+      shutdown: disabled
+  loop: "{{ vlans }}"

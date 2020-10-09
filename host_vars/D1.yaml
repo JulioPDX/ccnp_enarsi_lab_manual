@@ -1,0 +1,36 @@
+interfaces:
+  - name: GigabitEthernet0/0
+    enabled: yes
+    mode: trunk
+  - name: GigabitEthernet0/1
+    enabled: no
+  - name: GigabitEthernet0/2
+    enabled: no
+  - name: GigabitEthernet0/3
+    enabled: yes
+  - name: GigabitEthernet1/0
+    enabled: yes
+    mode: access
+    access_vlan: 1
+  - name: GigabitEthernet1/1
+    enabled: no
+  - name: GigabitEthernet1/2
+    enabled: no
+  - name: GigabitEthernet1/3
+    enabled: no
+  - name: GigabitEthernet2/0
+    enabled: yes
+    mode: access
+    access_vlan: 2
+  - name: GigabitEthernet2/1
+    enabled: no
+  - name: GigabitEthernet2/2
+    enabled: no
+  - name: GigabitEthernet2/3
+    enabled: no
+
+vlans:
+  - id: 2
+    name: HOST-VLAN
+
+# shut_int: "g0/1-2 , g1/1-3 , g2/1-3"

@@ -1,13 +1,18 @@
 ---
-- name: CCNP ENARSI Lab Manual 2.1.2
-  hosts: cisco
-  gather_facts: False
-  # strategy: free
-  tasks:
-    - name: run show version on remote devices
-      cisco.ios.ios_command:
-        commands: show version
+# - name: CCNP ENARSI Lab Manual 2.1.2
+#   hosts: routers
+#   gather_facts: False
+#   strategy: free
+#   roles:
+#   - enable_interfaces
+#   - rtr_interfaces
+#   - dhcp_config
 
-    # - name: VIEW ALL ANSIBLE FACT KEYS
-    #   debug:
-    #     var: ansible_net_interfaces
+- name: CCNP ENARSI Lab Manual 2.1.2
+  hosts: D1
+  gather_facts: False
+  strategy: free
+  roles:
+  # - enable_interfaces
+  # - vlans
+  - l2_interfaces
