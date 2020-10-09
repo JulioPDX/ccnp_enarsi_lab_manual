@@ -1,1 +1,1 @@
-# ccnp_encor_lab_manual
+# ccnp_enarsi_lab_manual
