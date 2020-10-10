@@ -1,4 +1,14 @@
 ---
+- name: Checking for valid lab definition
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Check that lab is defined
+      assert:
+        that: lab is defined
+        fail_msg: "no lab defined, please add extra vars defining lab variable"
+        # Example ansible-playbook deploy.yaml -e 'lab=01_2.1.2'
+
 - name: CCNP ENARSI Lab Manual Routers
   hosts: RTR1
   gather_facts: False
