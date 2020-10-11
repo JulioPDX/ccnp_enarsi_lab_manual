@@ -10,7 +10,7 @@
         # Example ansible-playbook deploy.yaml -e 'lab=01_2.1.2'
 
 - name: CCNP ENARSI Lab Manual Routers
-  hosts: RTR1
+  hosts: routers
   gather_facts: False
   strategy: free
   vars_files:

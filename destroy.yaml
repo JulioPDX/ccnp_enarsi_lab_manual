@@ -1,8 +1,18 @@
 ---
+- name: Checking for valid lab definition
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Check that lab is defined
+      assert:
+        that: lab is defined
+        fail_msg: "no lab defined, please add extra vars defining lab variable"
+        # Example ansible-playbook destroy.yaml -e 'lab=01_2.1.2'
+
 - name: Reset Routers
   hosts: routers
   gather_facts: False
-  # strategy: free
+  strategy: free
   vars_files:
     - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
   tasks:
@@ -48,8 +58,6 @@
           - confirm
         answer: 
           - y
-      vars:
-        ansible_command_timeout: 60
 
     - name: reset the connection 
       meta: reset_connection
