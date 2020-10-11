@@ -40,16 +40,16 @@
         lines:
         - config-register 0x2102
 
-    - name: save config before reload
-      cisco.ios.ios_config:
-        save_when: always
-
     - name: configure reset banner
       cisco.ios.ios_banner:
         banner: motd
         text: |
           {{ inventory_hostname }} has been reset
         state: present
+
+    - name: save config before reload
+      cisco.ios.ios_config:
+        save_when: always
 
     - name: reload device
       ansible.netcommon.cli_command: 
