@@ -41,13 +41,15 @@
           {{ inventory_hostname }} has been reset
         state: present
 
-    - name: Reload the Device 
+    - name: reload device
       ansible.netcommon.cli_command: 
         command: reload
         prompt: 
           - confirm
         answer: 
           - y
+      vars:
+        ansible_command_timeout: 60
 
     - name: reset the connection 
       meta: reset_connection
