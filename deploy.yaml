@@ -20,6 +20,7 @@
   - set_interfaces
   - rtr_interfaces
   - dhcp_config
+  - save_config
 
 - name: CCNP ENARSI Lab Manual Switches
   hosts: switches
@@ -33,3 +34,4 @@
   - role: vlans
     when: vlans is defined
   - role: sw_interfaces
+  - role: save_config
