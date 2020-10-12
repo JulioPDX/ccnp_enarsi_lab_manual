@@ -9,8 +9,8 @@
         fail_msg: "no lab defined, please add extra vars defining lab variable"
         # Example ansible-playbook destroy.yaml -e 'lab=01_2.1.2'
 
-- name: Reset Routers
-  hosts: routers
+- name: Reset devices
+  hosts: cisco
   gather_facts: False
   strategy: free
   vars_files:
@@ -35,10 +35,23 @@
         label: "{{ item.name }}"
       when: interfaces is defined
 
-    - name: configure register for reboot #weird bug for IOL images?
+    - name: delete eigrp process
       cisco.ios.ios_config:
         lines:
-        - config-register 0x2102
+        - no router eigrp {{ destroy.eigrp.as }}
+      when: destroy.eigrp.as is defined
+
+    - name: delete key chains
+      cisco.ios.ios_config:
+        lines:
+        - no router eigrp {{ item.name }}
+      loop: "{{ destroy.key_chains }}"
+      when: destroy.key_chains is defined
+
+    # - name: configure register for reboot #weird bug for IOL images?
+    #   cisco.ios.ios_config:
+    #     lines:
+    #     - config-register 0x2102
 
     - name: configure reset banner
       cisco.ios.ios_banner:
@@ -46,6 +59,40 @@
         text: |
           {{ inventory_hostname }} has been reset
         state: present
+
+    - name: save config before reload
+      cisco.ios.ios_config:
+        save_when: always
+
+#     - name: reload device
+#       ansible.netcommon.cli_command: 
+#         command: reload
+#         prompt: 
+#           - confirm
+#         answer: 
+#           - y
+
+#     - name: reset the connection 
+#       meta: reset_connection
+
+#     - name: wait for network device to come back up
+#       wait_for_connection:
+#         delay: 15
+
+- name: reset switch later 2 stuffs
+  hosts: switches
+  gather_facts: False
+  strategy: free
+  vars_files:
+    - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
+  tasks:
+
+    - name: delete switch VLANs
+      cisco.ios.ios_config:
+        lines:
+        - no vlan {{ item.id }}
+      loop: "{{ vlans }}"
+      when: vlans is defined
 
     - name: save config before reload
       cisco.ios.ios_config:
@@ -65,10 +112,3 @@
     - name: wait for network device to come back up
       wait_for_connection:
         delay: 15
-
-# - name: CCNP ENARSI Lab Manual Switches
-#   hosts: switches
-#   gather_facts: False
-#   strategy: free
-#   vars_files:
-#     - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
