@@ -36,3 +36,13 @@
   loop_control:
     label: "{{ item.name }}"
   when:  "item.mode is defined and item.mode == 'l3'"
+
+- name: configure loopbacks
+  cisco.ios.ios_config:
+    lines:
+    - ip address {{ item.ip_address | ansible.netcommon.ipaddr('address') }} {{ item.ip_address | ansible.netcommon.ipaddr('netmask') }}
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:  "'Loopback' in item.name"

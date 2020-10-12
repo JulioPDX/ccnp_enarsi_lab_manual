@@ -1,16 +1,12 @@
 interfaces:
   - name: GigabitEthernet0/0
-    enabled: yes
-    mode: l3
-    ip_address: 172.16.13.2/24
+    enabled: no
   - name: GigabitEthernet0/1
     enabled: no
   - name: GigabitEthernet0/2
     enabled: no
   - name: GigabitEthernet1/0
-    enabled: yes
-    mode: l3
-    ip_address: 172.16.1.2/24
+    enabled: no
   - name: GigabitEthernet1/1
     enabled: no
   - name: GigabitEthernet1/2

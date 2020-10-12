@@ -3,19 +3,10 @@ hostname: RTR1
 interfaces:
   - name: GigabitEthernet0/0
     sub_int: False
-    ip_address: 10.0.12.1/24
+    ip_address: 10.12.0.1/24
   - name: GigabitEthernet0/1
-    sub_int: True
-
-sub_interfaces:
-  - name: GigabitEthernet0/1.1
-    encap: 1
-    ip_address: 172.16.1.1/24
-  - name: GigabitEthernet0/1.2
-    encap: 2
-    ip_address: 192.168.1.1/24
-
-dhcp_pools:
-  - name: HOSTS
-    network: 192.168.1.0/24
-    gateway: 192.168.1.1
+    sub_int: False
+    ip_address: 192.168.3.1/24
+  - name: GigabitEthernet0/6
+    sub_int: False
+    ip_address: 10.13.0.1/24

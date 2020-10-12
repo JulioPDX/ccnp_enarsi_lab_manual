@@ -3,10 +3,10 @@ hostname: RTR3
 interfaces:
   - name: GigabitEthernet0/0
     sub_int: False
-    ip_address: 10.0.23.3/24
-  - name: GigabitEthernet0/1
+    ip_address: 10.23.0.3/24
+  - name: GigabitEthernet0/6
     sub_int: False
-    ip_address: 172.16.13.1/24
+    ip_address: 10.13.0.3/24
   - name: Loopback0
     sub_int: False
-    ip_address: 192.168.3.1/24
+    ip_address: 172.16.3.1/24
