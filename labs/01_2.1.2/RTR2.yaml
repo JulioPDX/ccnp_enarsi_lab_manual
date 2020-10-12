@@ -7,3 +7,9 @@ interfaces:
   - name: GigabitEthernet0/1
     sub_int: False
     ip_address: 10.0.23.2/24
+
+destroy:
+  eigrp:
+    as: 27
+  key_chains:
+    - name: EIGRP-AUTHEN-KEY

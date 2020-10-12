@@ -1,7 +1,7 @@
 - name: configure dhcp pools
   cisco.ios.ios_config:
     lines:
-    - network {{ item.network | ansible.netcommon.ipaddr('address') }} {{ item.network | ansible.netcommon.ipaddr('netmask') }}
+    - network {{ item.network | ansible.netcommon.ipaddr('network') }} {{ item.network | ansible.netcommon.ipaddr('netmask') }}
     - default-router {{ item.network | ansible.netcommon.ipaddr('next_usable') }}
     parents: ip dhcp pool {{ item.name }}
   loop: "{{ dhcp_pools }}"

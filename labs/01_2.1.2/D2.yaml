@@ -25,3 +25,9 @@ interfaces:
     enabled: no
   - name: GigabitEthernet2/3
     enabled: no
+
+destroy:
+  eigrp:
+    as: BASIC-EIGRP-LAB
+  key_chains:
+    - name: EIGRP-AUTHEN-KEY
