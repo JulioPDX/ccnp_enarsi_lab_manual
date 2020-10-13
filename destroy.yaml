@@ -42,7 +42,7 @@
       loop: "{{ interfaces }}"
       loop_control:
         label: "{{ item.name }}"
-      when: interfaces is defined
+      when: "interfaces is defined and 'Loopback' not in item.name"
 
     - name: delete eigrp process
       cisco.ios.ios_config:
@@ -82,6 +82,7 @@
       cisco.ios.ios_config:
         save_when: always
 
+# IOSv for routers needs to be worked on, reload issue
 #     - name: reload device
 #       ansible.netcommon.cli_command: 
 #         command: reload
