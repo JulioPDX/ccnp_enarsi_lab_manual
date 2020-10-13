@@ -27,13 +27,13 @@
       when: sub_interfaces is defined
 
     - name: delete loopbacks
-    cisco.ios.ios_config:
-      lines:
-      - no interface {{ item.name }}
-    loop: "{{ interfaces }}"
-    loop_control:
-      label: "{{ item.name }}"
-    when:  "'Loopback' in item.name"
+      cisco.ios.ios_config:
+        lines:
+        - no interface {{ item.name }}
+      loop: "{{ interfaces }}"
+      loop_control:
+        label: "{{ item.name }}"
+      when:  "'Loopback' in item.name"
 
     - name: default interfaces
       cisco.ios.ios_config:
