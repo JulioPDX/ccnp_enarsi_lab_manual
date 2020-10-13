@@ -8,8 +8,7 @@ interfaces:
     enabled: no
   - name: GigabitEthernet1/0
     enabled: yes
-    mode: access
-    access_vlan: 1
+    mode: trunk
   - name: GigabitEthernet1/1
     enabled: no
   - name: GigabitEthernet1/2
