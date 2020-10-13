@@ -37,7 +37,7 @@
 - name: configure ipv6 loopback addresses
   cisco.ios.ios_config:
     lines:
-    - ipv6 address {{ item.link_local | ansible.netcommon.ipaddr('host') }}
+    - ipv6 address {{ item.ipv6 | ansible.netcommon.ipaddr('host') }}
     parents: interface {{ item.name }}
   loop: "{{ interfaces }}"
   loop_control:
