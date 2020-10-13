@@ -44,6 +44,15 @@
         label: "{{ item.name }}"
       when: "interfaces is defined and 'Loopback' not in item.name"
 
+    - name: delete dhcp
+      cisco.ios.ios_config:
+        lines:
+        - no ip dhcp pool {{ item.name }}
+      loop: "{{ dhcp_pools }}"
+      loop_control:
+        label: "{{ item.name }}"
+      when: dhcp_pools is defined
+
     - name: delete eigrp process
       cisco.ios.ios_config:
         lines:

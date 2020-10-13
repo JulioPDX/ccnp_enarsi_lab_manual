@@ -29,7 +29,7 @@
     - ip routing
     - ipv6 unicast-routing
 
-- name: configure layer 3 switchports
+- name: configure ipv4 layer 3 switch ports
   cisco.ios.ios_config:
     lines:
     - no switchport
@@ -38,9 +38,20 @@
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when:  "item.mode is defined and item.mode == 'l3'"
+  when: "'Loopback' not in item.name and item.ipv4 is defined"
 
-- name: configure loopbacks
+- name: configure ipv6 layer 3 switch ports
+  cisco.ios.ios_config:
+    lines:
+    - no switchport
+    - ipv6 address {{ item.ipv6 | ansible.netcommon.ipaddr('host') }}
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:  "'Loopback' not in item.name and item.ipv6 is defined"
+
+- name: configure ipv4 loopbacks
   cisco.ios.ios_config:
     lines:
     - ip address {{ item.ipv4 | ansible.netcommon.ipaddr('address') }} {{ item.ipv4 | ansible.netcommon.ipaddr('netmask') }}
@@ -48,4 +59,24 @@
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when:  "'Loopback' in item.name"
+  when:  "'Loopback' in item.name and item.ipv4 is defined"
+
+- name: configure ipv6 loopbacks
+  cisco.ios.ios_config:
+    lines:
+    - ipv6 address {{ item.ipv6 | ansible.netcommon.ipaddr('host') }}
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:  "'Loopback' in item.name and item.ipv6 is defined"
+
+- name: configure ipv6 loopback link local addresses
+  cisco.ios.ios_config:
+    lines:
+    - ipv6 address {{ item.link_local | ansible.netcommon.ipaddr('address') }} link-local
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:  "'Loopback' in item.name and item.link_local is defined"

@@ -2,7 +2,7 @@
   cisco.ios.ios_config:
     lines: ipv6 unicast-routing 
 
-- name: configure ipv4 L3 interfaces that are not subinterfaces
+- name: configure ipv4 L3 interfaces that are not sub interfaces
   cisco.ios.ios_l3_interfaces:
     config:
     - name: "{{ item.name }}"
@@ -11,7 +11,38 @@
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when: item.sub_int == False and item.ipv4 is defined
+  when: "item.sub_int == False and item.ipv4 is defined and 'Loopback' not in item.name"
+
+- name: configure ipv6 L3 interfaces that are not sub interfaces
+  cisco.ios.ios_l3_interfaces:
+    config:
+    - name: "{{ item.name }}"
+      ipv6:
+      - address: "{{ item.ipv6 }}"
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: "item.sub_int == False and item.ipv6 is defined and 'Loopback' not in item.name"
+
+- name: configure ipv6 link local addresses that are not sub interfaces
+  cisco.ios.ios_config:
+    lines:
+    - ipv6 address {{ item.link_local | ansible.netcommon.ipaddr('address') }} link-local
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: item.sub_int == False and item.link_local is defined
+
+- name: configure ipv6 loopback addresses
+  cisco.ios.ios_config:
+    lines:
+    - ipv6 address {{ item.link_local | ansible.netcommon.ipaddr('host') }}
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: "item.sub_int == False and item.ipv6 is defined and 'Loopback' in item.name"
 
 - name: configure ipv4 sub interfaces
   cisco.ios.ios_config:
@@ -23,3 +54,24 @@
   loop_control:
     label: "{{ item.name }}"
   when: sub_interfaces is defined and item.ipv4 is defined
+
+- name: configure ipv6 sub interfaces
+  cisco.ios.ios_config:
+    lines:
+    - encapsulation dot1q {{ item.encap }}
+    - ipv6 address {{ item.ipv6 | ansible.netcommon.ipaddr('host') }}
+    parents: interface {{ item.name }}
+  loop: "{{ sub_interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: sub_interfaces is defined and item.ipv6 is defined
+
+- name: configure ipv6 link local addresses under sub interfaces
+  cisco.ios.ios_config:
+    lines:
+    - ipv6 address {{ item.link_local | ansible.netcommon.ipaddr('address') }} link-local
+    parents: interface {{ item.name }}
+  loop: "{{ sub_interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: sub_interfaces is defined and item.ipv6 is defined
