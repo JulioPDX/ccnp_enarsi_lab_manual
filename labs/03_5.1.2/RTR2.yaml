@@ -11,7 +11,7 @@ interfaces:
     link_local: fe80::2:2
   - name: Loopback0
     sub_int: False
-    ipv6: 2001:db8:ff:999:153/64
+    ipv6: 2001:db8:ff:999::1/64
     link_local: fe80::2:3
   - name: Loopback1
     sub_int: False

@@ -10,7 +10,7 @@
         # Example ansible-playbook deploy.yaml -e 'lab=01_2.1.2'
 
 - name: CCNP ENARSI Lab Manual Routers
-  hosts: routers #routers
+  hosts: RTR2 #routers
   gather_facts: False
   strategy: free
   vars_files:
@@ -22,16 +22,16 @@
   - dhcp_config
   - save_config
 
-- name: CCNP ENARSI Lab Manual Switches
-  hosts: switches #switches
-  gather_facts: False
-  strategy: free
-  vars_files:
-    - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
-  roles:
-  - role: banner
-  - role: set_interfaces
-  - role: vlans
-    when: vlans is defined
-  - role: sw_interfaces
-  - role: save_config
+# - name: CCNP ENARSI Lab Manual Switches
+#   hosts: switches #switches
+#   gather_facts: False
+#   strategy: free
+#   vars_files:
+#     - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
+#   roles:
+#   - role: banner
+#   - role: set_interfaces
+#   - role: vlans
+#     when: vlans is defined
+#   - role: sw_interfaces
+#   - role: save_config
