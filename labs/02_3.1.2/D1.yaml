@@ -2,7 +2,7 @@ interfaces:
   - name: GigabitEthernet0/0
     enabled: yes
     mode: l3
-    ip_address: 192.168.3.2/24
+    ipv4: 192.168.3.2/24
   - name: GigabitEthernet0/1
     enabled: no
   - name: GigabitEthernet0/2
@@ -24,8 +24,12 @@ interfaces:
   - name: GigabitEthernet2/3
     enabled: no
   - name: Loopback0
-    ip_address: 192.168.2.1/24
+    ipv4: 192.168.2.1/24
   - name: Loopback1
-    ip_address: 192.168.1.1/24
+    ipv4: 192.168.1.1/24
   - name: Loopback2
-    ip_address: 192.168.0.1/24
+    ipv4: 192.168.0.1/24
+
+destroy:
+  eigrp:
+    as: 98

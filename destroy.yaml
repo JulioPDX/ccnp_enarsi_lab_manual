@@ -53,9 +53,18 @@
     - name: delete key chains
       cisco.ios.ios_config:
         lines:
-        - no router eigrp {{ item.name }}
+        - no key chain {{ item.name }}
       loop: "{{ destroy.key_chains }}"
+      loop_control:
+        label: "{{ item.name }}"
       when: destroy.key_chains is defined
+
+    - name: delete named standard acls
+      cisco.ios.ios_config:
+        lines:
+        - no ip access-list standard {{ item.name }}
+      loop: "{{ destroy.acl.named.standard }}"
+      when: destroy.acl.named.standard is defined
 
     # - name: configure register for reboot #weird bug for IOL images?
     #   cisco.ios.ios_config:
@@ -88,7 +97,7 @@
 #       wait_for_connection:
 #         delay: 15
 
-- name: reset switch later 2 stuffs
+- name: reset switch layer 2 stuffs
   hosts: switches
   gather_facts: False
   strategy: free

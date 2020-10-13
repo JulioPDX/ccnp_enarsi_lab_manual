@@ -1,21 +1,25 @@
-- name: configure L3 interfaces that are not subinterfaces
+- name: enable ipv6 routing on routers
+  cisco.ios.ios_config:
+    lines: ipv6 unicast-routing 
+
+- name: configure ipv4 L3 interfaces that are not subinterfaces
   cisco.ios.ios_l3_interfaces:
     config:
     - name: "{{ item.name }}"
       ipv4:
-      - address: "{{ item.ip_address }}"
+      - address: "{{ item.ipv4 }}"
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when: item.sub_int == False
+  when: item.sub_int == False and item.ipv4 is defined
 
-- name: configure sub interfaces
+- name: configure ipv4 sub interfaces
   cisco.ios.ios_config:
     lines:
     - encapsulation dot1q {{ item.encap }}
-    - ip address {{ item.ip_address | ansible.netcommon.ipaddr('address') }} {{ item.ip_address | ansible.netcommon.ipaddr('netmask') }}
+    - ip address {{ item.ipv4 | ansible.netcommon.ipaddr('address') }} {{ item.ipv4 | ansible.netcommon.ipaddr('netmask') }}
     parents: interface {{ item.name }}
   loop: "{{ sub_interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when: sub_interfaces is defined
+  when: sub_interfaces is defined and item.ipv4 is defined
