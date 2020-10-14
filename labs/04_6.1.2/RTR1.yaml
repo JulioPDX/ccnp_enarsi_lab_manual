@@ -14,8 +14,3 @@ interfaces:
   - name: Loopback1
     sub_int: False
     ipv4: 192.168.1.1/26
-
-dhcp_pools:
-  - name: HOSTS
-    network: 192.168.1.0/24
-    gateway: 192.168.1.1
