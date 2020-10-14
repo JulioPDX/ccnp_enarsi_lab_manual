@@ -1,0 +1,6 @@
+- name: configure reset banner
+  cisco.ios.ios_banner:
+    banner: motd
+    text: |
+      {{ inventory_hostname }} has been reset
+    state: present

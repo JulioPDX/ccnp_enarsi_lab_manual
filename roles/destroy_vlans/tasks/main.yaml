@@ -1,0 +1,6 @@
+- name: delete switch VLANs
+  cisco.ios.ios_config:
+    lines:
+    - no vlan {{ item.id }}
+  loop: "{{ vlans }}"
+  when: vlans is defined
