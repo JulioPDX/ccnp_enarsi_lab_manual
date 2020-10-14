@@ -15,110 +15,19 @@
   strategy: free
   vars_files:
     - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
+  roles:
+  - destroy_lab
+  # - reset_reload # Not working for IOSv Routers
   tasks:
-
-    - name: delete sub interfaces
-      cisco.ios.ios_config:
-        lines:
-        - no interface {{ item.name }}
-      loop: "{{ sub_interfaces }}"
-      loop_control:
-        label: "{{ item.name }}"
-      when: sub_interfaces is defined
-
-    - name: delete loopbacks
-      cisco.ios.ios_config:
-        lines:
-        - no interface {{ item.name }}
-      loop: "{{ interfaces }}"
-      loop_control:
-        label: "{{ item.name }}"
-      when:  "'Loopback' in item.name"
-
-    - name: default interfaces
-      cisco.ios.ios_config:
-        lines:
-        - default interface {{ item.name }}
-      loop: "{{ interfaces }}"
-      loop_control:
-        label: "{{ item.name }}"
-      when: "interfaces is defined and 'Loopback' not in item.name"
-
-    - name: delete dhcp
-      cisco.ios.ios_config:
-        lines:
-        - no ip dhcp pool {{ item.name }}
-      loop: "{{ dhcp_pools }}"
-      loop_control:
-        label: "{{ item.name }}"
-      when: dhcp_pools is defined
-
-    - name: delete eigrp process
-      cisco.ios.ios_config:
-        lines:
-        - no router eigrp {{ destroy.eigrp.as }}
-      when: destroy.eigrp.as is defined
-
-    - name: delete classic IPv6 eigrp process
-      cisco.ios.ios_config:
-        lines:
-        - no ipv6 router eigrp {{ destroy.eigrp.ipv6.as }}
-      when: destroy.eigrp.ipv6.as is defined
-
-    - name: delete key chains
-      cisco.ios.ios_config:
-        lines:
-        - no key chain {{ item.name }}
-      loop: "{{ destroy.key_chains }}"
-      loop_control:
-        label: "{{ item.name }}"
-      when: destroy.key_chains is defined
-
-    - name: delete named standard acls
-      cisco.ios.ios_config:
-        lines:
-        - no ip access-list standard {{ item.name }}
-      loop: "{{ destroy.acl.named.standard }}"
-      when: destroy.acl.named.standard is defined
-
-    - name: delete named IPv6 prefix lists
-      cisco.ios.ios_config:
-        lines:
-        - no ipv6 prefix-list {{ item.name }}
-      loop: "{{ destroy.prefix_lists.ipv6.named }}"
-      when: destroy.prefix_lists.ipv6.named is defined
 
     # - name: configure register for reboot #weird bug for IOL images?
     #   cisco.ios.ios_config:
     #     lines:
     #     - config-register 0x2102
 
-    - name: configure reset banner
-      cisco.ios.ios_banner:
-        banner: motd
-        text: |
-          {{ inventory_hostname }} has been reset
-        state: present
-
     - name: save config before reload
       cisco.ios.ios_config:
         save_when: always
-
-# IOSv for routers needs to be worked on, reload issue
-#     - name: reload device
-#       ansible.netcommon.cli_command: 
-#         command: reload
-#         prompt: 
-#           - confirm
-#         answer: 
-#           - y
-
-#     - name: reset the connection 
-#       meta: reset_connection
-
-#     - name: wait for network device to come back up
-#       wait_for_connection:
-#         delay: 15
 
 - name: reset switch layer 2 stuffs
   hosts: switches
@@ -126,30 +35,6 @@
   strategy: free
   vars_files:
     - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
-  tasks:
-
-    - name: delete switch VLANs
-      cisco.ios.ios_config:
-        lines:
-        - no vlan {{ item.id }}
-      loop: "{{ vlans }}"
-      when: vlans is defined
-
-    - name: save config before reload
-      cisco.ios.ios_config:
-        save_when: always
-
-    - name: reload device
-      ansible.netcommon.cli_command: 
-        command: reload
-        prompt: 
-          - confirm
-        answer: 
-          - y
-
-    - name: reset the connection 
-      meta: reset_connection
-
-    - name: wait for network device to come back up
-      wait_for_connection:
-        delay: 15
+  roles:
+  - destroy_vlans
+  - reset_reload

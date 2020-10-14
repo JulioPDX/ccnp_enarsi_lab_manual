@@ -14,3 +14,7 @@ interfaces:
   - name: Loopback1
     sub_int: False
     ipv4: 192.168.1.1/26
+
+destroy:
+  ospf:
+    id: 123

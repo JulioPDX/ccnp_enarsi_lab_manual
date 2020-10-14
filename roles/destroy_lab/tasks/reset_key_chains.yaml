@@ -1,0 +1,8 @@
+- name: delete key chains
+  cisco.ios.ios_config:
+    lines:
+    - no key chain {{ item.name }}
+  loop: "{{ destroy.key_chains }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: destroy.key_chains is defined
