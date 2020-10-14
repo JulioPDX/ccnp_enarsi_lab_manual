@@ -29,3 +29,10 @@ interfaces:
     sub_int: False
     ipv6: 2001:db8:abcd:12::1/64
     link_local: fe80::3:7
+
+# authkey created
+destroy:
+  eigrp:
+    as: EIGRP_IPV6
+  key_chains:
+    - name: EIGRPV6-AUTHEN-KEY

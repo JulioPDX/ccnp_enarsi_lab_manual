@@ -27,3 +27,7 @@ interfaces:
     enabled: no
   - name: GigabitEthernet2/3
     enabled: no
+
+destroy:
+  eigrp:
+    as: EIGRP_IPV6

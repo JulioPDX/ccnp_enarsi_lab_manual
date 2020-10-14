@@ -3,7 +3,7 @@
     lines:
     - switchport mode access
     - switchport access vlan {{ item.access_vlan }}
-    - spanning-tree portfast
+    - spanning-tree portfast edge
     parents: interface {{ item.name }}
   loop: "{{ interfaces }}"
   loop_control:
@@ -71,7 +71,7 @@
     label: "{{ item.name }}"
   when:  "'Loopback' in item.name and item.ipv6 is defined"
 
-- name: configure ipv6 loopback link local addresses
+- name: configure ipv6 link local addresses
   cisco.ios.ios_config:
     lines:
     - ipv6 address {{ item.link_local | ansible.netcommon.ipaddr('address') }} link-local
@@ -79,4 +79,4 @@
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when:  "'Loopback' in item.name and item.link_local is defined"
+  when: item.link_local is defined

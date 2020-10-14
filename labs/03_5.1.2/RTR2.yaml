@@ -21,3 +21,15 @@ interfaces:
     sub_int: False
     ipv6: 2001:db8:cede:1::1/64
     link_local: fe80::2:5
+
+destroy:
+  eigrp:
+    as: BASIC-EIGRP-LAB
+    ipv6:
+      as: 43
+  key_chains:
+    - name: EIGRPV6-AUTHEN-KEY
+  prefix_lists:
+    ipv6:
+      named:
+        - name: DROP-CAFE-1
