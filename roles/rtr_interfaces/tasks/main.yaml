@@ -89,7 +89,7 @@
 - name: set ospf network type on interfaces
   cisco.ios.ios_config:
     lines:
-    - ip ospf {{ item.ospf_network }}
+    - ip ospf network {{ item.ospf_network }}
     parents: interface {{ item.name }}
   loop: "{{ interfaces }}"
   loop_control:
