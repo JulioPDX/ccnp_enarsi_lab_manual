@@ -2,15 +2,13 @@ interfaces:
   - name: GigabitEthernet0/0
     enabled: yes
     mode: l3
-    ipv4: 172.16.13.2/24
+    ipv4: 10.10.4.2/30
   - name: GigabitEthernet0/1
     enabled: no
   - name: GigabitEthernet0/2
     enabled: no
   - name: GigabitEthernet1/0
-    enabled: yes
-    mode: l3
-    ipv4: 172.16.1.2/24
+    enabled: no
   - name: GigabitEthernet1/1
     enabled: no
   - name: GigabitEthernet1/2
@@ -18,10 +16,48 @@ interfaces:
   - name: GigabitEthernet1/3
     enabled: no
   - name: GigabitEthernet2/0
-    enabled: no
+    enabled: yes
+    mode: l3
+    ipv4: 10.10.5.1/24
   - name: GigabitEthernet2/1
     enabled: no
   - name: GigabitEthernet2/2
     enabled: no
   - name: GigabitEthernet2/3
     enabled: no
+  - name: Loopback16
+    enabled: yes
+    ipv4: 10.10.16.1/24
+    ospf_network: point-to-point
+  - name: Loopback17
+    enabled: yes
+    ipv4: 10.10.17.1/24
+    ospf_network: point-to-point
+  - name: Loopback18
+    enabled: yes
+    ipv4: 10.10.18.1/24
+    ospf_network: point-to-point
+  - name: Loopback19
+    enabled: yes
+    ipv4: 10.10.19.1/24
+    ospf_network: point-to-point
+  - name: Loopback20
+    enabled: yes
+    ipv4: 10.10.20.1/24
+    ospf_network: point-to-point
+  - name: Loopback21
+    enabled: yes
+    ipv4: 10.10.21.1/24
+    ospf_network: point-to-point
+  - name: Loopback22
+    enabled: yes
+    ipv4: 10.10.22.1/24
+    ospf_network: point-to-point
+  - name: Loopback23
+    enabled: yes
+    ipv4: 10.10.23.1/24
+    ospf_network: point-to-point
+
+destroy:
+  ospf:
+    id: 123

@@ -85,3 +85,13 @@
   loop_control:
     label: "{{ item.name }}"
   when: sub_interfaces is defined and item.ipv6 is defined
+
+- name: set ospf network type on interfaces
+  cisco.ios.ios_config:
+    lines:
+    - ip ospf {{ item.ospf_network }}
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: item.ospf_network is defined

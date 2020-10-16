@@ -1,15 +1,14 @@
 interfaces:
   - name: GigabitEthernet0/0
     enabled: yes
-    mode: trunk
+    mode: l3
+    ipv4: 10.10.0.2/30
   - name: GigabitEthernet0/1
     enabled: no
   - name: GigabitEthernet0/2
     enabled: no
   - name: GigabitEthernet1/0
-    enabled: yes
-    mode: access
-    access_vlan: 1
+    enabled: no
   - name: GigabitEthernet1/1
     enabled: no
   - name: GigabitEthernet1/2
@@ -18,8 +17,8 @@ interfaces:
     enabled: no
   - name: GigabitEthernet2/0
     enabled: yes
-    mode: access
-    access_vlan: 2
+    mode: l3
+    ipv4: 10.10.1.1/24
   - name: GigabitEthernet2/1
     enabled: no
   - name: GigabitEthernet2/2
@@ -27,6 +26,6 @@ interfaces:
   - name: GigabitEthernet2/3
     enabled: no
 
-vlans:
-  - id: 2
-    name: HOST-VLAN
+destroy:
+  ospf:
+    id: 123
