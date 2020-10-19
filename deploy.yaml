@@ -19,6 +19,7 @@
   - banner
   - set_interfaces
   - rtr_interfaces
+  - ospf_config
   - dhcp_config
   - save_config
 
@@ -34,4 +35,5 @@
   - role: vlans
     when: vlans is defined
   - role: sw_interfaces
+  - role: ospf_config
   - role: save_config

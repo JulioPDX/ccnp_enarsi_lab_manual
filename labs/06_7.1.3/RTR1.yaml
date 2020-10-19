@@ -11,3 +11,16 @@ interfaces:
 destroy:
   ospf:
     id: 123
+
+ospf:
+  process_id: 123
+  router_id: 1.1.1.1
+  auto_cost:
+    reference_bandwidth: 1000
+  networks:
+  - address: 10.10.0.0
+    wildcard_bits: 0.0.0.3
+    area: "1"
+  - address: 172.16.0.0
+    wildcard_bits: 0.0.0.3
+    area: "0"

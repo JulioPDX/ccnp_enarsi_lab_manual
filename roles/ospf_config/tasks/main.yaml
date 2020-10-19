@@ -1,0 +1,23 @@
+- name: Configure ospf
+  cisco.ios.ios_ospfv2:
+    config:
+      processes:
+      - process_id: "{{ ospf.process_id }}"
+        router_id: "{{ ospf.router_id }}"
+        default_information:
+          originate: "{{ ospf.default_information.originate | default('no') }}"
+        auto_cost:
+          reference_bandwidth: "{{ ospf.auto_cost.reference_bandwidth }}"
+        network: "{{ item }}"
+  when: ospf is defined
+  loop: "{{ ospf.networks }}"
+
+- name: set ospf network type on interfaces
+  cisco.ios.ios_config:
+    lines:
+    - ip ospf network {{ item.ospf_network }}
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: item.ospf_network is defined

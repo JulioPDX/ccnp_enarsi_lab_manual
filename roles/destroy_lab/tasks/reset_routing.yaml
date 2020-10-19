@@ -10,8 +10,6 @@
     - no ipv6 router eigrp {{ destroy.eigrp.ipv6.as }}
   when: destroy.eigrp.ipv6.as is defined
 
-- name: delete ospf process
-  cisco.ios.ios_config:
-    lines:
-    - no router ospf {{ destroy.ospf.id }}
-  when: destroy.ospf.id is defined
+- name: Delete all OSPF processes
+  cisco.ios.ios_ospfv2:
+    state: deleted
