@@ -4,13 +4,20 @@
       processes:
       - process_id: "{{ ospf.process_id }}"
         router_id: "{{ ospf.router_id }}"
-        default_information:
-          originate: "{{ ospf.default_information.originate | default('no') }}"
         auto_cost:
           reference_bandwidth: "{{ ospf.auto_cost.reference_bandwidth }}"
         network: "{{ item }}"
   when: ospf is defined
-  loop: "{{ ospf.networks }}"
+  loop: "{{ ospf_networks }}"
+
+- name: Configure default information originate
+  cisco.ios.ios_ospfv2:
+    config:
+      processes:
+      - process_id: "{{ ospf.process_id }}"
+        default_information:
+          originate: "{{ ospf.default_information.originate }}"
+  when: ospf.default_information.originate is defined
 
 - name: set ospf network type on interfaces
   cisco.ios.ios_config:
