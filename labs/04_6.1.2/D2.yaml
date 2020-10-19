@@ -27,7 +27,3 @@ interfaces:
     enabled: no
   - name: GigabitEthernet2/3
     enabled: no
-
-destroy:
-  ospf:
-    id: 123

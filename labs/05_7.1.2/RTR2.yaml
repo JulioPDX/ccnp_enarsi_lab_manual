@@ -10,7 +10,3 @@ interfaces:
   - name: Loopback0
     sub_int: False
     ipv4: 209.165.200.225/27
-
-destroy:
-  ospf:
-    id: 123

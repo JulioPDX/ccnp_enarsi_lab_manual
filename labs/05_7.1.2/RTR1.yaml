@@ -7,7 +7,3 @@ interfaces:
   - name: GigabitEthernet0/1
     sub_int: False
     ipv4: 10.10.0.1/30
-
-destroy:
-  ospf:
-    id: 123
