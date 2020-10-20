@@ -1,6 +1,9 @@
 - name: include reset_routing
   include: reset_routing.yaml
 
+- name: include reset_static_routes
+  include: reset_static_routes.yaml
+
 - name: include reset_interfaces
   include: reset_interfaces.yaml
 

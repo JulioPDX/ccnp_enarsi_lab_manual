@@ -1,9 +1,14 @@
-- name: delete named standard acls
+- name: delete all ACLs
+  cisco.ios.ios_acls:
+    state: deleted
+  ignore_errors: yes
+
+- name: delete named IPv4 prefix lists
   cisco.ios.ios_config:
     lines:
-    - no ip access-list standard {{ item.name }}
-  loop: "{{ destroy.acl.named.standard }}"
-  when: destroy.acl.named.standard is defined
+    - no ip prefix-list {{ item.name }}
+  loop: "{{ destroy.prefix_lists.ipv4.named }}"
+  when: destroy.prefix_lists.ipv4.named is defined
 
 - name: delete named IPv6 prefix lists
   cisco.ios.ios_config:

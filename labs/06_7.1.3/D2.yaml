@@ -57,7 +57,3 @@ interfaces:
     enabled: yes
     ipv4: 10.10.23.1/24
     ospf_network: point-to-point
-
-destroy:
-  ospf:
-    id: 123

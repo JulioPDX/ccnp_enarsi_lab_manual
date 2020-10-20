@@ -1,0 +1,4 @@
+- name: delete static routes
+  cisco.ios.ios_static_routes:
+    state: deleted
+  ignore_errors: yes

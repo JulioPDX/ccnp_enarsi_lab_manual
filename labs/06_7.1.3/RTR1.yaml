@@ -8,10 +8,6 @@ interfaces:
     sub_int: False
     ipv4: 10.10.0.1/30
 
-destroy:
-  ospf:
-    id: 123
-
 ospf:
   process_id: 123
   router_id: 1.1.1.1
@@ -25,3 +21,9 @@ ospf_networks:
   - address: 172.16.0.0
     wildcard_bits: 0.0.0.3
     area: "0"
+
+destroy:
+  prefix_lists:
+    ipv4:
+      named:
+        - name: FILTER-1

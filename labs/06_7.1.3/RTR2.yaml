@@ -11,10 +11,6 @@ interfaces:
     sub_int: False
     ipv4: 209.165.200.225/27
 
-destroy:
-  ospf:
-    id: 123
-
 ospf:
   process_id: 123
   router_id: 2.2.2.1
