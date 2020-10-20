@@ -1,0 +1,11 @@
+- name: Configure ipv4 static routes w interface next hop
+  cisco.ios.ios_static_routes:
+    config:
+    - address_families:
+      - afi: ipv4
+        routes:
+        - dest: "{{ item.dest }}"
+          next_hops:
+          - interface: "{{ item.next_hop_interface }}"
+  loop: "{{ static_routes_ipv4 }}"
+  when: static_routes_ipv4 is defined and item.next_hop_interface is defined
