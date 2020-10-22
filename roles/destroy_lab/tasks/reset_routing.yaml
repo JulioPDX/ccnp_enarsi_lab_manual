@@ -10,6 +10,12 @@
     - no ipv6 router eigrp {{ destroy.eigrp.ipv6.as }}
   when: destroy.eigrp.ipv6.as is defined
 
-- name: Delete all OSPF processes
+- name: delete all OSPFv2 processes
   cisco.ios.ios_ospfv2:
     state: deleted
+  ignore_errors: yes
+
+- name: delete all OSPFv3 processes
+  cisco.ios.ios_ospfv3:
+    state: deleted
+  ignore_errors: yes
