@@ -16,3 +16,7 @@ interfaces:
   - name: Loopback1
     sub_int: False
     ipv4: 192.168.3.65/26
+
+destroy:
+  bgp:
+    as: 300
