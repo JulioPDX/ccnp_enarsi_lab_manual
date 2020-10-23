@@ -19,3 +19,10 @@
   cisco.ios.ios_ospfv3:
     state: deleted
   ignore_errors: yes
+
+- name: delete bgp
+  cisco.ios.ios_bgp:
+    config:
+      bgp_as: "{{ destroy.bgp.as }}"
+    operation: delete
+  when: destroy.bgp.as is defined
