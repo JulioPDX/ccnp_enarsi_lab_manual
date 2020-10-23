@@ -10,4 +10,4 @@ interfaces:
     sub_int: False
     ipv4: 10.10.0.1/30
     ipv6: 2001:db8:acad:1001::1/64
-    link_local: fe80::1:2
+    link_local: fe80::1:1
