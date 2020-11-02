@@ -3,7 +3,25 @@ hostname: RTR2
 interfaces:
   - name: GigabitEthernet0/0
     sub_int: False
-    ipv4: 10.0.12.2/24
+    ipv4: 10.1.2.2/24
+    ipv6: 2001:db8:acad:1012::2/64
+    link_local: fe80::2:1
   - name: GigabitEthernet0/1
     sub_int: False
-    ipv4: 10.0.23.2/24
+    ipv4: 10.2.3.2/24
+    ipv6: 2001:db8:acad:1023::2/64
+    link_local: fe80::2:2
+  - name: Loopback0
+    sub_int: False
+    ipv4: 192.168.2.1/27
+    ipv6: 2001:db8:acad:2000::1/64
+    link_local: fe80::2:3
+  - name: Loopback1
+    sub_int: False
+    ipv4: 192.168.2.65/26
+    ipv6: 2001:db8:acad:2001::1/64
+    link_local: fe80::2:4
+
+destroy:
+  bgp:
+    as: 500

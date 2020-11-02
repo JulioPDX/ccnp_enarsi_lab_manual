@@ -23,3 +23,15 @@
     - no ip as-path access-list {{ item }}
   loop: "{{ destroy.acl.as_path }}"
   when: destroy.acl.as_path is defined
+
+- name: delete bgp community new format
+  cisco.ios.ios_config:
+    lines:
+    - no ip bgp-community new-format
+
+- name: delete numbered community-list
+  cisco.ios.ios_config:
+    lines:
+    - no ip community-list {{ item }}
+  loop: "{{ destroy.community_list.numbered }}"
+  when: destroy.community_list.numbered is defined
