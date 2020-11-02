@@ -13,6 +13,9 @@
 - name: include reset_key_chains
   include: reset_key_chains.yaml
 
+- name: include reset_route_maps
+  include: reset_route_maps.yaml
+
 - name: include reset_acl_prefix
   include: reset_acl_prefix.yaml
 

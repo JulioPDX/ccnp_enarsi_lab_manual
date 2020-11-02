@@ -26,3 +26,20 @@ interfaces:
     ipv4: 192.168.1.65/26
     ipv6: 2001:db8:acad:1001::1/64
     link_local: fe80::1:5
+
+destroy:
+  bgp:
+    as: 6500
+  prefix_lists:
+    ipv4:
+      named:
+        - name: ALLOWED_FROM_R2
+        - name: PREFERRED_IPV4_PATH
+    ipv6:
+      named:
+        - name: IPV6_ALLOWED_FROM_R2
+  route_maps:
+    - USE_THIS_PATH_FOR_IPV4
+  acl:
+    as_path:
+      - 1

@@ -26,3 +26,7 @@ interfaces:
     ipv4: 192.168.3.65/26
     ipv6: 2001:db8:acad:3001::1/64
     link_local: fe80::3:5
+
+destroy:
+  bgp:
+    as: 300

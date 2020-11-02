@@ -16,3 +16,10 @@
     - no ipv6 prefix-list {{ item.name }}
   loop: "{{ destroy.prefix_lists.ipv6.named }}"
   when: destroy.prefix_lists.ipv6.named is defined
+
+- name: delete bgp as-path acl
+  cisco.ios.ios_config:
+    lines:
+    - no ip as-path access-list {{ item }}
+  loop: "{{ destroy.acl.as_path }}"
+  when: destroy.acl.as_path is defined

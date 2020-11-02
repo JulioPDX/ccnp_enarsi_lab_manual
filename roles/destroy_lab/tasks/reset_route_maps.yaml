@@ -1,0 +1,6 @@
+- name: delete route maps
+  cisco.ios.ios_config:
+    lines:
+    - no route-map {{ item }}
+  loop: "{{ destroy.route_maps }}"
+  when: destroy.route_maps is defined
