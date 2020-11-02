@@ -44,3 +44,5 @@ destroy:
   route_maps:
     - COMMSET
     - COMMSET_6
+    - COMMCHECK_4
+    - COMMCHECK_6
