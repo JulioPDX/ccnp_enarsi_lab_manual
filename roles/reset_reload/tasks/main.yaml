@@ -6,11 +6,9 @@
   ansible.netcommon.cli_command: 
     command: reload
     prompt:
-      - Save?
       - confirm
     answer:
-      - y
-      - y
+      - 'y'
 
 - name: reset the connection 
   meta: reset_connection
