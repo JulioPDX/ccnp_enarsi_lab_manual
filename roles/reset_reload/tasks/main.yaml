@@ -9,6 +9,7 @@
       - confirm
     answer:
       - 'y'
+  ignore_errors: yes
 
 - name: reset the connection 
   meta: reset_connection

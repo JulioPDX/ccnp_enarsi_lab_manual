@@ -19,5 +19,8 @@
 - name: include reset_acl_prefix
   include: reset_acl_prefix.yaml
 
+- name: include reset_policy
+  include: reset_policy.yaml
+
 - name: include reset_banner
   include: reset_banner.yaml

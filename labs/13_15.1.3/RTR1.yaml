@@ -10,3 +10,10 @@ interfaces:
   - name: GigabitEthernet0/6
     sub_int: False
     ipv4: 172.16.2.1/30
+
+destroy:
+  route_maps:
+    - R1-to-R3
+    - LOCAL-PBR
+  local_policy:
+    - LOCAL-PBR

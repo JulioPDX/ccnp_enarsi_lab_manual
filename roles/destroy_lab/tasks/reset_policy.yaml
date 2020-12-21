@@ -1,0 +1,6 @@
+- name: delete local policy
+  cisco.ios.ios_config:
+    lines:
+    - no ip local policy route-map {{ item }}
+  loop: "{{ destroy.local_policy }}"
+  when: destroy.local_policy is defined
