@@ -5,9 +5,11 @@
 - name: reload device
   ansible.netcommon.cli_command: 
     command: reload
-    prompt: 
+    prompt:
+      - Save?
       - confirm
-    answer: 
+    answer:
+      - y
       - y
 
 - name: reset the connection 
