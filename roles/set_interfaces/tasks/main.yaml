@@ -6,3 +6,13 @@
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
+
+- name: 'set "serial link" bandwidth'
+  cisco.ios.ios_config:
+    lines:
+    - bandwidth 1544
+    parents: interface {{ item.name }}
+  loop: "{{ interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: "item.name == 'GigabitEthernet0/6' or item.name == 'GigabitEthernet0/7'"

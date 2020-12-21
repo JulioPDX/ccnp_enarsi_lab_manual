@@ -3,19 +3,10 @@ hostname: RTR1
 interfaces:
   - name: GigabitEthernet0/0
     sub_int: False
-    ipv4: 10.0.12.1/24
+    ipv4: 172.16.0.2/30
   - name: GigabitEthernet0/1
-    sub_int: True
-
-sub_interfaces:
-  - name: GigabitEthernet0/1.1
-    encap: 1
-    ipv4: 172.16.1.1/24
-  - name: GigabitEthernet0/1.2
-    encap: 2
-    ipv4: 192.168.1.1/24
-
-dhcp_pools:
-  - name: HOSTS
-    network: 192.168.1.0/24
-    gateway: 192.168.1.1
+    sub_int: False
+    ipv4: 10.10.0.1/30
+  - name: GigabitEthernet0/6
+    sub_int: False
+    ipv4: 172.16.2.1/30
