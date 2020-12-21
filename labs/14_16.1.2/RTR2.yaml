@@ -3,7 +3,11 @@ hostname: RTR2
 interfaces:
   - name: GigabitEthernet0/0
     sub_int: False
-    ipv4: 10.0.12.2/24
+    ipv4: 10.1.12.2/24
+    ipv6: 2001:db8:acad:12::2/64
+    link_local: fe80::12:2
   - name: GigabitEthernet0/1
     sub_int: False
-    ipv4: 10.0.23.2/24
+    ipv4: 10.1.23.2/24
+    ipv6: 2001:db8:acad:23::2/64
+    link_local: fe80::23:2
