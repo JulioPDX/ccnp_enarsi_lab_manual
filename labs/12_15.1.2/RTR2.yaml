@@ -3,7 +3,23 @@ hostname: RTR2
 interfaces:
   - name: GigabitEthernet0/0
     sub_int: False
-    ipv4: 10.0.12.2/24
+    ipv4: 172.16.0.1/30
   - name: GigabitEthernet0/1
     sub_int: False
-    ipv4: 10.0.23.2/24
+    ipv4: 192.168.0.1/30
+  - name: Loopback10
+    sub_int: False
+    ipv4: 10.10.10.1/24
+    ospf_network: point-to-point
+
+destroy:
+  eigrp:
+    as: 1
+  route_maps:
+    - R3-FILTER
+    - R1-FILTER
+  prefix_lists:
+    ipv4:
+      named:
+        - name: EIGRP-FILTER
+        - name: R1-PL

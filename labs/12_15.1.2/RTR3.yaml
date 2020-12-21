@@ -3,10 +3,40 @@ hostname: RTR3
 interfaces:
   - name: GigabitEthernet0/0
     sub_int: False
-    ipv4: 10.0.23.3/24
-  - name: GigabitEthernet0/1
-    sub_int: False
-    ipv4: 172.16.13.1/24
-  - name: Loopback0
+    ipv4: 192.168.0.2/30
+  - name: Loopback3
     sub_int: False
     ipv4: 192.168.3.1/24
+    ospf_network: point-to-point
+  - name: Loopback20
+    sub_int: False
+    ipv4: 192.168.20.1/24
+    ospf_network: point-to-point
+  - name: Loopback21
+    sub_int: False
+    ipv4: 192.168.21.1/24
+    ospf_network: point-to-point
+  - name: Loopback22
+    sub_int: False
+    ipv4: 192.168.22.1/24
+    ospf_network: point-to-point
+  - name: Loopback23
+    sub_int: False
+    ipv4: 192.168.23.1/24
+    ospf_network: point-to-point
+  - name: Loopback32
+    sub_int: False
+    ipv4: 192.168.32.1/26
+    ospf_network: point-to-point
+  - name: Loopback33
+    sub_int: False
+    ipv4: 192.168.33.1/27
+    ospf_network: point-to-point
+  - name: Loopback34
+    sub_int: False
+    ipv4: 192.168.34.1/28
+    ospf_network: point-to-point
+  - name: Loopback35
+    sub_int: False
+    ipv4: 192.168.35.1/29
+    ospf_network: point-to-point

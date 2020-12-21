@@ -1,0 +1,4 @@
+wheel
+ansible >= 2.9.0
+ansible-pylibssh
+netaddr

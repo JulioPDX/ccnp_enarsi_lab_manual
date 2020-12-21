@@ -1,4 +1,6 @@
-- name: delete static routes
+- name: delete static routes from default VRF
   cisco.ios.ios_static_routes:
+    config:
+      - vrf:
     state: deleted
   ignore_errors: yes
