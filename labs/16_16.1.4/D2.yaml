@@ -2,15 +2,13 @@ interfaces:
   - name: GigabitEthernet0/0
     enabled: yes
     mode: l3
-    ipv4: 172.16.13.2/24
+    ipv4: 10.1.32.2/24
   - name: GigabitEthernet0/1
     enabled: no
   - name: GigabitEthernet0/2
     enabled: no
   - name: GigabitEthernet1/0
-    enabled: yes
-    mode: l3
-    ipv4: 172.16.1.2/24
+    enabled: no
   - name: GigabitEthernet1/1
     enabled: no
   - name: GigabitEthernet1/2
@@ -25,3 +23,9 @@ interfaces:
     enabled: no
   - name: GigabitEthernet2/3
     enabled: no
+  - name: Loopback0
+    ipv4: 209.165.201.1/25
+
+destroy:
+  bgp:
+    as: 64532
