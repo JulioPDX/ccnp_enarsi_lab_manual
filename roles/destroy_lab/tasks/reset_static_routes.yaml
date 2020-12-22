@@ -1,14 +1,29 @@
-- name: checking static routes
+- name: checking ipv4 static routes
   cisco.ios.ios_command:
     commands: show run | inc ip route
-  register: statics
+  register: statics_ipv4
 
-- name: setting static routes as variable
+- name: setting ipv4 static routes as variable
   set_fact:
-    static_routes: "{{ statics.stdout_lines.0 }}"
+    static_routes_ipv4: "{{ statics_ipv4.stdout_lines.0 }}"
 
-- name: deleting static routes not in MGMT VRF
+- name: deleting ipv4 static routes not in MGMT VRF
   cisco.ios.ios_config:
     lines: no {{ item }}
-  loop: "{{ static_routes }}"
+  loop: "{{ static_routes_ipv4 }}"
+  when: "'MGMT' not in item"
+
+- name: checking ipv6 static routes
+  cisco.ios.ios_command:
+    commands: show run | inc ipv6 route
+  register: statics_ipv6
+
+- name: setting ipv6 static routes as variable
+  set_fact:
+    static_routes_ipv6: "{{ statics_ipv6.stdout_lines.0 }}"
+
+- name: deleting ipv6 static routes not in MGMT VRF
+  cisco.ios.ios_config:
+    lines: no {{ item }}
+  loop: "{{ static_routes_ipv6 }}"
   when: "'MGMT' not in item"

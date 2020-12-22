@@ -3,19 +3,16 @@ hostname: RTR1
 interfaces:
   - name: GigabitEthernet0/0
     sub_int: False
-    ipv4: 10.0.12.1/24
-  - name: GigabitEthernet0/1
+  - name: GigabitEthernet0/2
     sub_int: True
+  - name: GigabitEthernet0/6
+    sub_int: False
 
+# Placed only to assist in deletion, will have to implement and follow book
 sub_interfaces:
-  - name: GigabitEthernet0/1.1
-    encap: 1
-    ipv4: 172.16.1.1/24
-  - name: GigabitEthernet0/1.2
-    encap: 2
-    ipv4: 192.168.1.1/24
-
-dhcp_pools:
-  - name: HOSTS
-    network: 192.168.1.0/24
-    gateway: 192.168.1.1
+  - name: GigabitEthernet0/2.5
+    encap: 5
+    ipv4: 10.1.2.1/24
+  - name: GigabitEthernet0/2.8
+    encap: 8
+    ipv4: 10.1.3.1/24

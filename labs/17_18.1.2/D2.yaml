@@ -1,16 +1,16 @@
 interfaces:
   - name: GigabitEthernet0/0
+    enabled: no
+  - name: GigabitEthernet0/1
     enabled: yes
     mode: l3
-    ipv4: 172.16.13.2/24
-  - name: GigabitEthernet0/1
-    enabled: no
+    ipv4: 10.1.3.2/24
+    ipv6: 2001:db8:acad:1013::2/64
+    link_local: fe80::d2:1
   - name: GigabitEthernet0/2
     enabled: no
   - name: GigabitEthernet1/0
-    enabled: yes
-    mode: l3
-    ipv4: 172.16.1.2/24
+    enabled: no
   - name: GigabitEthernet1/1
     enabled: no
   - name: GigabitEthernet1/2
@@ -18,10 +18,31 @@ interfaces:
   - name: GigabitEthernet1/3
     enabled: no
   - name: GigabitEthernet2/0
-    enabled: no
+    enabled: yes
+    mode: access
+    access_vlan: 11
   - name: GigabitEthernet2/1
     enabled: no
   - name: GigabitEthernet2/2
     enabled: no
   - name: GigabitEthernet2/3
     enabled: no
+  - name: vlan11
+    enabled: yes
+    mode: int_vlan
+    ipv4: 192.168.3.1/24
+    ipv6: 2001:db8:acad:3000::1/64
+    link_local: fe80::d2:2
+
+vlans:
+  - id: 11
+    name: LOCAL_VLAN
+
+static_routes_ipv4:
+  - dest: 0.0.0.0/0
+    next_hop_interface: GigabitEthernet0/1
+    next_hop_address: 10.1.3.1
+static_routes_ipv6:
+  - dest: ::/0
+    next_hop_interface: GigabitEthernet0/1
+    next_hop_address: 2001:db8:acad:1013::1

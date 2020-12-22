@@ -1,4 +1,4 @@
-- name: Configure ipv4 static routes w interface next hop
+- name: Configure ipv4 static routes
   cisco.ios.ios_static_routes:
     config:
     - address_families:
@@ -6,6 +6,24 @@
         routes:
         - dest: "{{ item.dest }}"
           next_hops:
-          - interface: "{{ item.next_hop_interface }}"
+          - interface: "{{ item.next_hop_interface | default() }}"
+            forward_router_address: "{{ item.next_hop_address | default() }}"
   loop: "{{ static_routes_ipv4 }}"
-  when: static_routes_ipv4 is defined and item.next_hop_interface is defined
+  loop_control:
+    label: "Static route to {{ item.dest }}"
+  when: static_routes_ipv4 is defined
+
+- name: Configure ipv6 static routes
+  cisco.ios.ios_static_routes:
+    config:
+    - address_families:
+      - afi: ipv6
+        routes:
+        - dest: "{{ item.dest }}"
+          next_hops:
+          - interface: "{{ item.next_hop_interface | default() }}"
+            forward_router_address: "{{ item.next_hop_address | default() }}"
+  loop: "{{ static_routes_ipv6 }}"
+  loop_control:
+    label: "Static route to {{ item.dest }}"
+  when: static_routes_ipv6 is defined
