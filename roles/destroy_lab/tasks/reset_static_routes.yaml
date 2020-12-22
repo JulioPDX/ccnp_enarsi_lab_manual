@@ -1,6 +1,14 @@
-- name: delete static routes from default VRF
-  cisco.ios.ios_static_routes:
-    config:
-      - vrf:
-    state: deleted
-  ignore_errors: yes
+- name: checking static routes
+  cisco.ios.ios_command:
+    commands: show run | inc ip route
+  register: statics
+
+- name: setting static routes as variable
+  set_fact:
+    static_routes: "{{ statics.stdout_lines.0 }}"
+
+- name: deleting static routes not in MGMT VRF
+  cisco.ios.ios_config:
+    lines: no {{ item }}
+  loop: "{{ static_routes }}"
+  when: "'MGMT' not in item"

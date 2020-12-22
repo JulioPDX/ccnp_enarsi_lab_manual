@@ -31,11 +31,11 @@
   vars_files:
     - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
   roles:
-  # - role: banner
-  # - role: set_interfaces
-  # - role: vlans
-  #   when: vlans is defined
+  - role: banner
+  - role: set_interfaces
+  - role: vlans
+    when: vlans is defined
   - role: sw_interfaces
-  # - role: static_routes
-  # - role: ospf_config
-  # - role: save_config
+  - role: static_routes
+  - role: ospf_config
+  - role: save_config

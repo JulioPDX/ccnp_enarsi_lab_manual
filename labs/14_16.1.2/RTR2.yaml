@@ -11,3 +11,9 @@ interfaces:
     ipv4: 10.1.23.2/24
     ipv6: 2001:db8:acad:23::2/64
     link_local: fe80::23:2
+
+destroy:
+  eigrp:
+    as: CISCO
+  route_maps:
+    - E2O

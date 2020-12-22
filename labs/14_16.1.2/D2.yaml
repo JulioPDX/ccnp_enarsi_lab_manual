@@ -29,3 +29,7 @@ interfaces:
     ipv4: 198.51.100.1/25
     ipv6: 2001:db8:198:51:100::1/80
     link_local: fe80::198:1
+
+destroy:
+  eigrp:
+    as: CISCO
