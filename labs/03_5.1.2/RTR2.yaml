@@ -24,7 +24,8 @@ interfaces:
 
 destroy:
   eigrp:
-    as: BASIC-EIGRP-LAB
+    as: 
+      - BASIC-EIGRP-LAB
     ipv6:
       as: 43
   key_chains:

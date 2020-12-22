@@ -13,4 +13,5 @@ interfaces:
 
 destroy:
   eigrp:
-    as: 98
+    as: 
+      - 98

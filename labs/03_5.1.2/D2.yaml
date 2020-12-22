@@ -30,4 +30,5 @@ interfaces:
 
 destroy:
   eigrp:
-    as: EIGRP_IPV6
+    as: 
+      - EIGRP_IPV6

@@ -14,6 +14,7 @@ interfaces:
 
 destroy:
   eigrp:
-    as: CISCO
+    as: 
+      - CISCO
   route_maps:
     - E2O

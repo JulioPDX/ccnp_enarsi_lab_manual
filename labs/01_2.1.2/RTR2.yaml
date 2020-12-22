@@ -10,6 +10,7 @@ interfaces:
 
 destroy:
   eigrp:
-    as: 27
+    as: 
+      - 27
   key_chains:
     - name: EIGRP-AUTHEN-KEY

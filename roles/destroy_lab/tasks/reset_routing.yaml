@@ -1,8 +1,9 @@
 - name: delete eigrp process
   cisco.ios.ios_config:
     lines:
-    - no router eigrp {{ destroy.eigrp.as }}
+    - no router eigrp {{ item }}
   when: destroy.eigrp.as is defined
+  loop: "{{ destroy.eigrp.as }}"
 
 - name: delete classic IPv6 eigrp process
   cisco.ios.ios_config:

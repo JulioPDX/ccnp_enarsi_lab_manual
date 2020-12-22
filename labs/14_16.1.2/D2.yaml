@@ -32,4 +32,5 @@ interfaces:
 
 destroy:
   eigrp:
-    as: CISCO
+    as: 
+      - CISCO

@@ -28,6 +28,7 @@ interfaces:
 
 destroy:
   eigrp:
-    as: BASIC-EIGRP-LAB
+    as: 
+      - BASIC-EIGRP-LAB
   key_chains:
     - name: EIGRP-AUTHEN-KEY

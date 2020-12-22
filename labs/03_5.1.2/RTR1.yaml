@@ -20,6 +20,7 @@ sub_interfaces:
 
 destroy:
   eigrp:
-    as: EIGRP_IPV6
+    as: 
+      - EIGRP_IPV6
   key_chains:
     - name: EIGRPV6-AUTHEN-KEY
