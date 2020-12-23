@@ -16,12 +16,14 @@
     - name: setting ipv6 static routes as variable
       set_fact:
         static_routes_ipv6: "{{ statics_ipv6.stdout_lines.0 }}"
-    - debug: var=static_routes_ipv6[0]
-      when: "{{ static_routes_ipv6[0] }} > 0"
+        list_length: "{{ statics_ipv6.stdout_lines.0 | length }}"
+    - debug: var=static_routes_ipv6
+    - debug: var=list_length
+      when: list_length | int > 1
 
-    - name: deleting ipv6 static routes not in MGMT VRF
-      cisco.ios.ios_config:
-        lines: no {{ item }}
-      loop: "{{ static_routes_ipv6 }}"
-      when: "'MGMT' not in item"
-      ignore_errors: true
+    # - name: deleting ipv6 static routes not in MGMT VRF
+    #   cisco.ios.ios_config:
+    #     lines: no {{ item }}
+    #   loop: "{{ static_routes_ipv6 }}"
+    #   when: "'MGMT' not in item and list_length | int > 1"
+    #   ignore_errors: true
