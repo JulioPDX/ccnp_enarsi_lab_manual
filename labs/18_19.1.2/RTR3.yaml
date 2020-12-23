@@ -3,10 +3,16 @@ hostname: RTR3
 interfaces:
   - name: GigabitEthernet0/0
     sub_int: False
-    ipv4: 10.0.23.3/24
-  - name: GigabitEthernet0/1
-    sub_int: False
-    ipv4: 172.16.13.1/24
+    ipv4: 10.2.3.3/24
+    ipv6: 2001:db8:acad:23::3/64
+    link_local: fe80::3:1
   - name: Loopback0
     sub_int: False
     ipv4: 192.168.3.1/24
+    ipv6: 2001:db8:acad:3::1/64
+    link_local: fe80::3:2
+  - name: Loopback1
+    sub_int: False
+    ipv4: 172.16.3.1/24
+    ipv6: 2001:db8:acad:1723::1/64
+    link_local: fe80::3:3
