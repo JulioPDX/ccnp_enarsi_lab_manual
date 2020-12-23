@@ -1,0 +1,5 @@
+- name: delete all vrfs besides MGMT
+  cisco.ios.ios_vrf:
+    vrfs:
+    - MGMT
+    purge: yes
