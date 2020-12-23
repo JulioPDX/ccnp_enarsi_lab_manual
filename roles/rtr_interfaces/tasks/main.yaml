@@ -11,7 +11,7 @@
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when: "item.sub_int == False and item.ipv4 is defined and 'Loopback' not in item.name"
+  when: "not item.sub_int and item.ipv4 is defined and 'Loopback' not in item.name"
 
 - name: configure ipv6 L3 interfaces that are not sub interfaces
   cisco.ios.ios_l3_interfaces:
@@ -22,7 +22,7 @@
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when: "item.sub_int == False and item.ipv6 is defined and 'Loopback' not in item.name"
+  when: "not item.sub_int and item.ipv6 is defined and 'Loopback' not in item.name"
 
 - name: configure ipv6 link local addresses that are not sub interfaces
   cisco.ios.ios_config:
@@ -32,7 +32,7 @@
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when: item.sub_int == False and item.link_local is defined
+  when: not item.sub_int and item.link_local is defined
 
 - name: configure ipv6 loopback addresses
   cisco.ios.ios_config:
@@ -42,7 +42,7 @@
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when: "item.sub_int == False and item.ipv6 is defined and 'Loopback' in item.name"
+  when: "not item.sub_int and item.ipv6 is defined and 'Loopback' in item.name"
 
 - name: configure ipv4 loopback addresses
   cisco.ios.ios_config:
@@ -52,7 +52,7 @@
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when: "item.sub_int == False and item.ipv4 is defined and 'Loopback' in item.name"
+  when: "not item.sub_int and item.ipv4 is defined and 'Loopback' in item.name"
 
 - name: configure ipv4 sub interfaces
   cisco.ios.ios_config:

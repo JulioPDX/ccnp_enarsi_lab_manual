@@ -4,7 +4,7 @@
 
 # Getting error on this task but switches do in fact, reboot
 - name: reload device
-  ansible.netcommon.cli_command: 
+  ansible.netcommon.cli_command:
     command: reload
     prompt:
       - confirm
@@ -12,7 +12,7 @@
       - 'y'
   ignore_errors: yes
 
-- name: reset the connection 
+- name: reset the connection
   meta: reset_connection
 
 - name: wait for network device to come back up
