@@ -1,6 +1,6 @@
 ---
 - name: Test playbook
-  hosts: A1
+  hosts: RTR1
   gather_facts: False
   tasks:
     # - name: delete all vrfs besides MGMT
@@ -8,22 +8,14 @@
     #     vrfs:
     #     - MGMT
     #     purge: yes
-    - name: checking ipv6 static routes
-      cisco.ios.ios_command:
-        commands: show run | inc ipv6 route
-      register: statics_ipv6
 
-    - name: setting ipv6 static routes as variable
-      set_fact:
-        static_routes_ipv6: "{{ statics_ipv6.stdout_lines.0 }}"
-        list_length: "{{ statics_ipv6.stdout_lines.0 | length }}"
-    - debug: var=static_routes_ipv6
-    - debug: var=list_length
-      when: list_length | int > 1
-
-    # - name: deleting ipv6 static routes not in MGMT VRF
-    #   cisco.ios.ios_config:
-    #     lines: no {{ item }}
-    #   loop: "{{ static_routes_ipv6 }}"
-    #   when: "'MGMT' not in item and list_length | int > 1"
-    #   ignore_errors: true
+    - name: configure ipv4 L3 interfaces that are not sub interfaces
+      cisco.ios.ios_l3_interfaces:
+        config:
+        - name: "Tunnel0"
+          ipv4:
+          - address: "100.100.100.1/30"
+      # loop: "{{ interfaces }}"
+      # loop_control:
+      #   label: "{{ item.name }}"
+      # when: "not item.sub_int and item.ipv4 is defined and 'Loopback' not in item.name"

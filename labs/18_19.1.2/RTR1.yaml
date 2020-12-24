@@ -16,3 +16,14 @@ interfaces:
     ipv4: 172.16.1.1/24
     ipv6: 2001:db8:acad:1721::1/64
     link_local: fe80::1:3
+
+tunnel_interfaces:
+  - name: tunnel0
+  - name: tunnel1
+
+destroy:
+  eigrp:
+    as: 
+      - 68
+    ipv6:
+      as: 43

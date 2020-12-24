@@ -25,6 +25,15 @@
     label: "{{ item.name }}"
   when:  "'Loopback' in item.name"
 
+- name: delete tunnel interfaces
+  cisco.ios.ios_config:
+    lines:
+    - no interface {{ item.name }}
+  loop: "{{ tunnel_interfaces }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when: tunnel_interfaces is defined
+
 - name: default interfaces
   cisco.ios.ios_config:
     lines:
@@ -32,4 +41,4 @@
   loop: "{{ interfaces }}"
   loop_control:
     label: "{{ item.name }}"
-  when: "interfaces is defined and 'Loopback' not in item.name or 'vlan' not in item.name"
+  when: "interfaces is defined and 'Loopback' not in item.name and 'vlan' not in item.name"
