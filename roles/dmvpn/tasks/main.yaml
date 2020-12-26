@@ -1,0 +1,4 @@
+- name: configure dmvpn tunnel from template
+  cisco.ios.ios_config:
+    backup: no
+    src: dmvpn.j2

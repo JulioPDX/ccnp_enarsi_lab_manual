@@ -1,12 +1,30 @@
 hostname: RTR3
 
 interfaces:
-  - name: GigabitEthernet0/0
-    sub_int: False
-    ipv4: 10.0.23.3/24
   - name: GigabitEthernet0/1
     sub_int: False
-    ipv4: 172.16.13.1/24
+    ipv4: 203.0.113.2/30
   - name: Loopback0
     sub_int: False
     ipv4: 192.168.3.1/24
+  - name: Loopback1
+    sub_int: False
+    ipv4: 172.16.3.1/24
+
+tunnel_interfaces:
+  - name: tunnel1
+    ipv4: 100.100.100.3/29
+    mtu: 1400
+    nhrp_multicast: 192.0.2.1
+    nhrp_map: "100.100.100.1 192.0.2.1"
+    nhrp_nhs: 100.100.100.1
+    nhrp_authentication: NHRPauth
+    tcp_adjust_mss: 1360
+    tunnel_source: Loopback0
+    tunnel_destination: 192.0.2.1
+    tunnel_mode: "gre ip"
+    tunnel_key: 999
+
+static_routes_ipv4:
+  - dest: 0.0.0.0/0
+    next_hop_interface: GigabitEthernet0/1

@@ -1,16 +1,16 @@
 interfaces:
   - name: GigabitEthernet0/0
     enabled: yes
-    mode: l3
-    ipv4: 172.16.13.2/24
+    mode: access
+    access_vlan: 1
   - name: GigabitEthernet0/1
     enabled: no
   - name: GigabitEthernet0/2
     enabled: no
   - name: GigabitEthernet1/0
     enabled: yes
-    mode: l3
-    ipv4: 172.16.1.2/24
+    mode: access
+    access_vlan: 1
   - name: GigabitEthernet1/1
     enabled: no
   - name: GigabitEthernet1/2

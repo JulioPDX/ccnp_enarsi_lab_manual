@@ -1,0 +1,34 @@
+{% for tunnel in tunnel_interfaces %}
+interface Tunnel1
+ ip address {{ tunnel.ipv4 | ansible.netcommon.ipaddr('address') }} {{ tunnel.ipv4 | ansible.netcommon.ipaddr('netmask') }}
+ ip mtu {{ tunnel.mtu }}
+{% if tunnel.bandwidth is defined %}
+ bandwidth {{ tunnel.bandwidth }}
+{% endif %}
+{% if tunnel.tunnel_mode is defined %}
+ tunnel mode {{ tunnel.tunnel_mode }}
+{% endif %}
+{% if tunnel.nhrp_multicast is defined %}
+ ip nhrp map multicast {{ tunnel.nhrp_multicast }}
+{% endif %}
+{% if tunnel.nhrp_map is defined %}
+ ip nhrp map {{ tunnel.nhrp_map }}
+{% endif %}
+ ip nhrp network-id 1
+{% if tunnel.nhrp_nhs is defined %}
+ ip nhrp nhs {{ tunnel.nhrp_nhs }}
+{% endif %}
+{% if tunnel.nhrp_authentication is defined %}
+ ip nhrp authentication {{ tunnel.nhrp_authentication }}
+{% endif %}
+{% if tunnel.tcp_adjust_mss is defined %}
+ ip tcp adjust-mss 1360
+{% endif %}
+ tunnel source {{ tunnel.tunnel_source }}
+{% if tunnel.tunnel_destination is defined %}
+ tunnel destination {{ tunnel.tunnel_destination }}
+{% endif %}
+{% if tunnel.tunnel_key is defined %}
+ tunnel key {{ tunnel.tunnel_key }}
+{% endif %}
+{% endfor %}
