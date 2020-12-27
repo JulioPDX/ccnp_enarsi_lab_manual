@@ -16,6 +16,14 @@ tunnel_interfaces:
     tunnel_mode: "gre multipoint"
     tunnel_key: 999
 
-static_routes_ipv4:
-  - dest: 0.0.0.0/0
-    next_hop_interface: GigabitEthernet0/1
+eigrp:
+  ipv4:
+    - name: DMVPN_TUNNEL_NET
+      as: 68
+      router_id: 1.1.1.1
+      interfaces:
+        - name: tunnel1
+          split_horizon: False
+      networks:
+        - 100.100.100.1/29
+      
