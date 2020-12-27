@@ -24,3 +24,13 @@ tunnel_interfaces:
     tunnel_destination: 192.0.2.1
     tunnel_mode: "gre ip"
     tunnel_key: 999
+
+eigrp:
+  ipv4:
+    - name: DMVPN_TUNNEL_NET
+      as: 68
+      router_id: 2.2.2.2
+      networks:
+        - 100.100.100.0/29
+        - 172.16.2.0/24
+      eigrp_stub: connected

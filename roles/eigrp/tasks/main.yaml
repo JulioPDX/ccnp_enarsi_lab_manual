@@ -1,1 +1,4 @@
----
+- name: configure eigrp from template
+  cisco.ios.ios_config:
+    backup: no
+    src: eigrp.j2

@@ -16,16 +16,18 @@
   vars_files:
     - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
   roles:
-  - role: banner
-  - role: set_interfaces
-  - role: rtr_interfaces
-  - role: static_routes
-  - role: ospf_config
-    when: ospf is defined
-  - role: dhcp_config
+  # - role: banner
+  # - role: set_interfaces
+  # - role: rtr_interfaces
+  # - role: static_routes
+  # - role: ospf_config
+  #   when: ospf is defined
+  # - role: dhcp_config
+  # - role: dmvpn
+  #   when: lab == '20_19.1.4'
+  - role: eigrp
+    when: eigrp.ipv4
   - role: save_config
-  - role: dmvpn
-    when: lab == '20_19.1.4'
 
 - name: CCNP ENARSI Lab Manual Switches
   hosts: switches #switches
