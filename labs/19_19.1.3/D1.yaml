@@ -37,3 +37,8 @@ static_routes_ipv4:
     next_hop_interface: GigabitEthernet1/0
   - dest: 172.16.3.0/24
     next_hop_interface: GigabitEthernet1/0
+
+destroy:
+  eigrp:
+    as:
+      - DMVPN_TRANS_NET

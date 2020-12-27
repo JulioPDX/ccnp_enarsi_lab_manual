@@ -27,3 +27,13 @@ interfaces:
     ipv4: 198.51.100.1/30
   - name: GigabitEthernet2/3
     enabled: no
+
+eigrp:
+  ipv4:
+    - name: DMVPN_TRANS_NET
+      as: 168
+      router_id: 40.4.4.4
+      networks:
+        - 203.0.113.0/30
+        - 192.0.2.0/30
+        - 198.51.100.0/30

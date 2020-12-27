@@ -1,20 +1,13 @@
 router eigrp DMVPN_TUNNEL_NET
  address-family ipv4 unicast autonomous-system 68
-topology base
-  exit-af-topology
+  eigrp router-id 3.3.3.3
     network 100.100.100.0 0.0.0.7
     network 172.16.3.0 0.0.0.255
-    eigrp router-id 3.3.3.3
   eigrp stub connected
-  exit-address-family
- exit
-router eigrp DMVPN_TRANS_NET
+  router eigrp DMVPN_TRANS_NET
  address-family ipv4 unicast autonomous-system 168
-topology base
-  exit-af-topology
+  eigrp router-id 30.3.3.3
     network 203.0.113.0 0.0.0.3
     network 192.168.3.0 0.0.0.255
-    eigrp router-id 30.3.3.3
   eigrp stub connected
-  exit-address-family
- exit
+  

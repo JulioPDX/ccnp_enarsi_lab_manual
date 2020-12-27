@@ -1,0 +1,7 @@
+router eigrp DMVPN_TRANS_NET
+ address-family ipv4 unicast autonomous-system 168
+  eigrp router-id 40.4.4.4
+    network 203.0.113.0 0.0.0.3
+    network 192.0.2.0 0.0.0.3
+    network 198.51.100.0 0.0.0.3
+  

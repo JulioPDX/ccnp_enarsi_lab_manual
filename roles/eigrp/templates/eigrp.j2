@@ -1,6 +1,12 @@
 {% for instance in eigrp.ipv4 %}
 router eigrp {{ instance.name }}
  address-family ipv4 unicast autonomous-system {{ instance.as }}
+  {% if instance.router_id is defined -%} 
+  eigrp router-id {{ instance.router_id }}
+  {% endif -%}
+  {% for network in instance.networks %}
+  network {{ network | ansible.netcommon.ipaddr('network') }} {{ network | ansible.netcommon.ipaddr('wildcard') }}
+  {% endfor %}
 {% if instance.interfaces is defined -%}
  {% for interface in instance.interfaces -%}
   af-interface {{ interface.name }}
@@ -8,19 +14,9 @@ router eigrp {{ instance.name }}
    no split-horizon
   exit-af-interface
   {% endif -%}
- {% endfor -%}
+ {% endfor %}
 {% endif -%}
-  topology base
-  exit-af-topology
-  {% for network in instance.networks %}
-  network {{ network | ansible.netcommon.ipaddr('network') }} {{ network | ansible.netcommon.ipaddr('wildcard') }}
-  {% endfor %}
-  {% if instance.router_id is defined -%} 
-  eigrp router-id {{ instance.router_id }}
-  {% endif -%}
   {% if instance.eigrp_stub is defined -%} 
   eigrp stub {{ instance.eigrp_stub }}
   {% endif -%}
- exit-address-family
- exit
 {% endfor %}
