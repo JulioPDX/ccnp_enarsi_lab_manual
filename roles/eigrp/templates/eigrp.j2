@@ -1,7 +1,11 @@
-{% for instance in eigrp.ipv4 %}
+
+
+
+
+{% for instance in eigrp.ipv4 -%}
 router eigrp {{ instance.name }}
  address-family ipv4 unicast autonomous-system {{ instance.as }}
-{% if instance.interfaces is defined %}
+{%- if instance.interfaces is defined %}
  {% for interface in instance.interfaces %}
   af-interface {{ interface.name }}
   {% if interface.split_horizon == False %}
@@ -22,4 +26,5 @@ router eigrp {{ instance.name }}
   eigrp stub {{ instance.eigrp_stub }}
   {% endif %}
  exit-address-family
+ exit
 {% endfor %}

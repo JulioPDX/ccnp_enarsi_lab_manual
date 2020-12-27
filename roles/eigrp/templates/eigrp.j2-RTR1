@@ -1,0 +1,11 @@
+router eigrp DMVPN_TUNNEL_NET
+ address-family ipv4 unicast autonomous-system 68   af-interface tunnel1
+     no split-horizon
+  exit-af-interface
+     topology base
+  exit-af-topology
+    network 100.100.100.0 0.0.0.7
+     
+  eigrp router-id 1.1.1.1
+     exit-address-family
+ exit

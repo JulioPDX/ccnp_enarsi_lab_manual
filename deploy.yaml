@@ -27,7 +27,7 @@
   #   when: lab == '20_19.1.4'
   - role: eigrp
     when: eigrp.ipv4
-  - role: save_config
+  # - role: save_config
 
 - name: CCNP ENARSI Lab Manual Switches
   hosts: switches #switches

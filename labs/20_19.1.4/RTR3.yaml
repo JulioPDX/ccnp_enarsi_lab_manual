@@ -34,3 +34,10 @@ eigrp:
         - 100.100.100.0/29
         - 172.16.3.0/24
       eigrp_stub: connected
+    - name: DMVPN_TRANS_NET
+      as: 168
+      router_id: 30.3.3.3
+      networks:
+        - 203.0.113.0/30
+        - 192.168.3.0/24
+      eigrp_stub: connected
