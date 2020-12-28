@@ -26,4 +26,5 @@ destroy:
     as: 
       - 68
     ipv6:
-      as: 43
+      as: 
+        - 43

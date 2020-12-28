@@ -9,26 +9,6 @@
         fail_msg: "no lab defined, please add extra vars defining lab variable"
         # Example ansible-playbook deploy.yaml -e lab=01_2.1.2
 
-- name: CCNP ENARSI Lab Manual Routers
-  hosts: routers #routers
-  gather_facts: False
-  strategy: free
-  vars_files:
-    - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
-  roles:
-  # - role: banner
-  # - role: set_interfaces
-  # - role: rtr_interfaces
-  # - role: static_routes
-  # - role: ospf_config
-  #   when: ospf is defined
-  # - role: dhcp_config
-  # - role: dmvpn
-  #   when: lab == '20_19.1.4'
-  - role: eigrp
-    when: eigrp.ipv4
-  # - role: save_config
-
 - name: CCNP ENARSI Lab Manual Switches
   hosts: switches #switches
   gather_facts: False
@@ -41,9 +21,29 @@
   # - role: vlans
   #   when: vlans is defined
   # - role: sw_interfaces
-  # - role: static_routes
-  # - role: ospf_config
-  #   when: ospf is defined
+  - role: static_routes
+  - role: ospf_config
+    when: ospf is defined
   - role: eigrp
-    when: eigrp.ipv4
+    when: eigrp.ipv4 is defined
+  - role: save_config
+
+- name: CCNP ENARSI Lab Manual Routers
+  hosts: routers #routers
+  gather_facts: False
+  strategy: free
+  vars_files:
+    - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
+  roles:
+  # - role: banner
+  # - role: set_interfaces
+  # - role: rtr_interfaces
+  - role: static_routes
+  - role: ospf_config
+    when: ospf is defined
+  - role: dhcp_config
+  - role: dmvpn
+    when: lab == '20_19.1.4' or lab =='22_20.1.2'
+  - role: eigrp
+    when: eigrp.ipv4 is defined
   - role: save_config

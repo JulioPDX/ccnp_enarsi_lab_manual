@@ -1,15 +1,16 @@
 interfaces:
   - name: GigabitEthernet0/0
     enabled: yes
-    mode: trunk
+    mode: l3
+    ipv4: 192.0.2.2/30
   - name: GigabitEthernet0/1
     enabled: no
   - name: GigabitEthernet0/2
     enabled: no
   - name: GigabitEthernet1/0
     enabled: yes
-    mode: access
-    access_vlan: 1
+    mode: l3
+    ipv4: 203.0.113.1/30
   - name: GigabitEthernet1/1
     enabled: no
   - name: GigabitEthernet1/2
@@ -17,16 +18,27 @@ interfaces:
   - name: GigabitEthernet1/3
     enabled: no
   - name: GigabitEthernet2/0
-    enabled: yes
-    mode: access
-    access_vlan: 2
+    enabled: no
   - name: GigabitEthernet2/1
     enabled: no
   - name: GigabitEthernet2/2
-    enabled: no
+    enabled: yes
+    mode: l3
+    ipv4: 198.51.100.1/30
   - name: GigabitEthernet2/3
     enabled: no
 
-vlans:
-  - id: 2
-    name: HOST-VLAN
+eigrp:
+  ipv4:
+    - name: DMVPN_TRANS_NET
+      as: 168
+      router_id: 40.4.4.4
+      networks:
+        - 203.0.113.0/30
+        - 192.0.2.0/30
+        - 198.51.100.0/30
+
+destroy:
+  eigrp:
+    as:
+      - DMVPN_TRANS_NET

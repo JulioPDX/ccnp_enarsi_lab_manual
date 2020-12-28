@@ -31,4 +31,10 @@ interface Tunnel1
 {% if tunnel.tunnel_key is defined %}
  tunnel key {{ tunnel.tunnel_key }}
 {% endif %}
+{% if tunnel.nhrp_shortcut is defined %}
+ ip nhrp shortcut
+{% endif %}
+{% if tunnel.nhrp_redirect is defined %}
+ ip nhrp redirect
+{% endif %}
 {% endfor %}

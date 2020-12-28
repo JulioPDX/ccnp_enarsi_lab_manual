@@ -18,13 +18,8 @@
   roles:
   - destroy_lab
   # - reset_reload # Not working for IOSv Routers
+
   tasks:
-
-    # - name: configure register for reboot #weird bug for IOL images?
-    #   cisco.ios.ios_config:
-    #     lines:
-    #     - config-register 0x2102
-
     - name: save config before reload
       cisco.ios.ios_config:
         save_when: always

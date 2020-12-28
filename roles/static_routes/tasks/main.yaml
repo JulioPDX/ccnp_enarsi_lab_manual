@@ -6,8 +6,8 @@
         routes:
         - dest: "{{ item.dest }}"
           next_hops:
-          - interface: "{{ item.next_hop_interface | default() }}"
-            forward_router_address: "{{ item.next_hop_address | default() }}"
+          - interface: "{{ item.next_hop_interface | default(omit) }}"
+            forward_router_address: "{{ item.next_hop_address | default(omit) }}"
   loop: "{{ static_routes_ipv4 }}"
   loop_control:
     label: "Static route to {{ item.dest }}"
@@ -21,8 +21,8 @@
         routes:
         - dest: "{{ item.dest }}"
           next_hops:
-          - interface: "{{ item.next_hop_interface | default() }}"
-            forward_router_address: "{{ item.next_hop_address | default() }}"
+          - interface: "{{ item.next_hop_interface | default(omit) }}"
+            forward_router_address: "{{ item.next_hop_address | default(omit) }}"
   loop: "{{ static_routes_ipv6 }}"
   loop_control:
     label: "Static route to {{ item.dest }}"

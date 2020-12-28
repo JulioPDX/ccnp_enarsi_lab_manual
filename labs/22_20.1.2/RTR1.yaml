@@ -1,21 +1,40 @@
 hostname: RTR1
 
 interfaces:
-  - name: GigabitEthernet0/0
-    sub_int: False
-    ipv4: 10.0.12.1/24
   - name: GigabitEthernet0/1
-    sub_int: True
+    sub_int: False
+    ipv4: 192.0.2.1/30
 
-sub_interfaces:
-  - name: GigabitEthernet0/1.1
-    encap: 1
-    ipv4: 172.16.1.1/24
-  - name: GigabitEthernet0/1.2
-    encap: 2
-    ipv4: 192.168.1.1/24
+tunnel_interfaces:
+  - name: tunnel1
+    ipv4: 100.100.100.1/29
+    bandwidth: 4000 # in kilobits
+    mtu: 1400
+    nhrp_authentication: NHRPauth
+    nhrp_redirect: True
+    tcp_adjust_mss: 1360
+    tunnel_source: GigabitEthernet0/1
+    tunnel_mode: "gre multipoint"
+    tunnel_key: 999
 
-dhcp_pools:
-  - name: HOSTS
-    network: 192.168.1.0/24
-    gateway: 192.168.1.1
+eigrp:
+  ipv4:
+    - name: DMVPN_TUNNEL_NET
+      as: 68
+      router_id: 1.1.1.1
+      interfaces:
+        - name: tunnel1
+          split_horizon: False
+      networks:
+        - 100.100.100.0/29
+    - name: DMVPN_TRANS_NET
+      as: 168
+      router_id: 10.1.1.1
+      networks:
+        - 192.0.2.0/30
+      
+destroy:
+  eigrp:
+    as:
+      - DMVPN_TUNNEL_NET
+      - DMVPN_TRANS_NET

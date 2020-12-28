@@ -1,9 +1,49 @@
 hostname: RTR2
 
 interfaces:
-  - name: GigabitEthernet0/0
+  - name: GigabitEthernet0/2
     sub_int: False
-    ipv4: 10.0.12.2/24
-  - name: GigabitEthernet0/1
+    ipv4: 198.51.100.2/30
+  - name: Loopback0
     sub_int: False
-    ipv4: 10.0.23.2/24
+    ipv4: 192.168.2.1/24
+  - name: Loopback1
+    sub_int: False
+    ipv4: 172.16.2.1/24
+
+tunnel_interfaces:
+  - name: tunnel1
+    ipv4: 100.100.100.2/29
+    mtu: 1400
+    nhrp_multicast: 192.0.2.1
+    nhrp_map: "100.100.100.1 192.0.2.1"
+    nhrp_nhs: 100.100.100.1
+    nhrp_authentication: NHRPauth
+    nhrp_shortcut: True
+    tcp_adjust_mss: 1360
+    tunnel_source: Loopback0
+    tunnel_mode: "gre multipoint"
+    tunnel_key: 999
+
+eigrp:
+  ipv4:
+    - name: DMVPN_TUNNEL_NET
+      as: 68
+      router_id: 2.2.2.2
+      networks:
+        - 100.100.100.0/29
+        - 172.16.2.0/24
+      eigrp_stub: connected
+    - name: DMVPN_TRANS_NET
+      as: 168
+      router_id: 20.2.2.2
+      networks:
+        - 198.51.100.0/30
+        - 192.168.2.0/24
+      eigrp_stub: connected
+
+destroy:
+  eigrp:
+    as:
+      - DMVPN_TUNNEL_NET
+      - DMVPN_TRANS_NET

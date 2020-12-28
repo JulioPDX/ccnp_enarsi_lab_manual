@@ -1,9 +1,9 @@
-- name: save template for review
-  template:
-    src: ./roles/eigrp/templates/eigrp.j2
-    dest: ./roles/eigrp/templates/eigrp.j2-{{ inventory_hostname }}
-  delegate_to: localhost
-- name: configure eigrp from template
+# - name: save template for review
+#   template:
+#     src: ./roles/eigrp/templates/eigrp.j2
+#     dest: ./roles/eigrp/templates/eigrp.j2-{{ inventory_hostname }}
+#   delegate_to: localhost
+- name: configure eigrp ipv4 from template
   cisco.ios.ios_config:
     backup: no
     src: eigrp.j2

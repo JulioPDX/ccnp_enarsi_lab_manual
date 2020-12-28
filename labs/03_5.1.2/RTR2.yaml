@@ -27,7 +27,8 @@ destroy:
     as: 
       - BASIC-EIGRP-LAB
     ipv6:
-      as: 43
+      as: 
+        - 43
   key_chains:
     - name: EIGRPV6-AUTHEN-KEY
   prefix_lists:

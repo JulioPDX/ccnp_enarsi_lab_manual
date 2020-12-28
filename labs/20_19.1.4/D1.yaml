@@ -37,3 +37,8 @@ eigrp:
         - 203.0.113.0/30
         - 192.0.2.0/30
         - 198.51.100.0/30
+
+destroy:
+  eigrp:
+    as:
+      - DMVPN_TRANS_NET

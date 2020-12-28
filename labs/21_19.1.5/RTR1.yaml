@@ -1,21 +1,21 @@
 hostname: RTR1
 
 interfaces:
-  - name: GigabitEthernet0/0
-    sub_int: False
-    ipv4: 10.0.12.1/24
   - name: GigabitEthernet0/1
-    sub_int: True
+    sub_int: False
+    ipv6: 2001:db8:acad:1::1/64
+    link_local: fe80::1
 
-sub_interfaces:
-  - name: GigabitEthernet0/1.1
-    encap: 1
-    ipv4: 172.16.1.1/24
-  - name: GigabitEthernet0/1.2
-    encap: 2
-    ipv4: 192.168.1.1/24
+static_routes_ipv6:
+  - dest: ::/0
+    next_hop_address: 2001:db8:acad:1::2
 
-dhcp_pools:
-  - name: HOSTS
-    network: 192.168.1.0/24
-    gateway: 192.168.1.1
+tunnel_interfaces:
+  - name: tunnel1
+
+destroy:
+  eigrp:
+    ipv6:
+      as: 
+        - 68
+        - 168

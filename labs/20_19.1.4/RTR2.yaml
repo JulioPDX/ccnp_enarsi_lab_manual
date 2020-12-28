@@ -41,3 +41,9 @@ eigrp:
         - 198.51.100.0/30
         - 192.168.2.0/24
       eigrp_stub: connected
+
+destroy:
+  eigrp:
+    as:
+      - DMVPN_TUNNEL_NET
+      - DMVPN_TRANS_NET

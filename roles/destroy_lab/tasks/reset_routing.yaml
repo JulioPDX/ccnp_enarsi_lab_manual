@@ -8,8 +8,9 @@
 - name: delete classic IPv6 eigrp process
   cisco.ios.ios_config:
     lines:
-    - no ipv6 router eigrp {{ destroy.eigrp.ipv6.as }}
+    - no ipv6 router eigrp {{ item }}
   when: destroy.eigrp.ipv6.as is defined
+  loop: "{{ destroy.eigrp.ipv6.as }}"
 
 - name: delete all OSPFv2 processes
   cisco.ios.ios_ospfv2:
