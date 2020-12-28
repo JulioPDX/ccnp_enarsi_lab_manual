@@ -16,11 +16,11 @@
   vars_files:
     - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
   roles:
-  # - role: banner
-  # - role: set_interfaces
-  # - role: vlans
-  #   when: vlans is defined
-  # - role: sw_interfaces
+  - role: banner
+  - role: set_interfaces
+  - role: vlans
+    when: vlans is defined
+  - role: sw_interfaces
   - role: static_routes
   - role: ospf_config
     when: ospf is defined
@@ -35,9 +35,9 @@
   vars_files:
     - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
   roles:
-  # - role: banner
-  # - role: set_interfaces
-  # - role: rtr_interfaces
+  - role: banner
+  - role: set_interfaces
+  - role: rtr_interfaces
   - role: static_routes
   - role: ospf_config
     when: ospf is defined
