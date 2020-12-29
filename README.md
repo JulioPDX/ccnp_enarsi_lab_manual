@@ -4,9 +4,9 @@
 
 ## Purpose
 
-Hello Internet! While working through the [CCNP ENARSI Lab Manual](https://www.ciscopress.com/store/ccnp-enterprise-advanced-routing-enarsi-v8-lab-manual-9780136870937), I got pretty tired of having to reset the lab and reconfigure basic IP configurations on each device. That is how this little project started, and my curiouisty with messing with the new Cisco IOS collection. The goal of this repo is to help me or anyone out there working through the lab manual.
+Hello Internet! While working through the [CCNP ENARSI Lab Manual](https://www.ciscopress.com/store/ccnp-enterprise-advanced-routing-enarsi-v8-lab-manual-9780136870937), I got pretty tired of having to reset the lab and reconfigure basic IP configurations on each device. That is how this little project started, and my curiosity with messing with the new Cisco IOS collection. The goal of this repo is to help me or anyone out there working through the lab manual.
 
-Long story short, and this will be a long story! This repo will help build the initial configurations for each device before starting a lab. Once the user completes the lab, there is also a destroy playbook to reset the lab. Side note, this repository is not a replacement for the lab manual. It is still required to go through the labs. This is only a complimentary tool, not a replacement. One more note, I did not use any official Cisco Network Academy training so I do not have access to the troubleshooting labs in the book. Maybe I'll add some troubleshootig labs later on if this gets popular :).
+Long story short, and this will be a long story! This repo will help build the initial configurations for each device before starting a lab. Once the user completes the lab, there is also a destroy playbook to reset the lab. Side note, this repository is not a replacement for the lab manual. It is still required to go through the labs. This is only a complimentary tool, not a replacement. One more note, I did not use any official Cisco Network Academy training so I do not have access to the troubleshooting labs in the book. Maybe I'll add some troubleshooting labs later on if this gets popular :).
 
 ## Getting started
 
@@ -114,7 +114,7 @@ The deploy playbook will handle configuring the interfaces, setting static route
 
 ### Deploying
 
-The deploy file is nothing too fancy. Its just calling out certain roles that will take care of the configuration. There is a simple assert at the beginining to make sure the user passes in a lab variable. This is where the individual lab folder comes in. When the user passes in the lab variable, Ansible will load the correct variable files to configure or destroy the nodes.
+The deploy file is nothing too fancy. Its just calling out certain roles that will take care of the configuration. There is a simple assert at the beginning to make sure the user passes in a lab variable. This is where the individual lab folder comes in. When the user passes in the lab variable, Ansible will load the correct variable files to configure or destroy the nodes.
 
 ```yaml
 # deploy.yaml
@@ -245,7 +245,7 @@ The configuration portion for the most part has pretty specific roles. Each havi
         save_when: always
 ```
 
-In the second playbook above, there is only one role called. But in actuality it is calling many reset files. This was mainly done for my sanity as the number of roles kept growing. I tried to make the destroy portion one small role... but that ended up growing either way. Anywho, below is a snip of the main.yaml file in the destroy_lab role.
+In the second playbook above, there is only one role called. But in actuality it is calling many reset files. This was mainly done for my sanity as the number of roles kept growing. I tried to make the destroy portion one small role... but that ended up growing either way. Anyhow, below is a snip of the main.yaml file in the destroy_lab role.
 
 ```yaml
 # main.yaml
@@ -325,13 +325,13 @@ When creating this I worked through the book from front to back. Build lab, work
 
 ### Lab Deploy Example
 
-Here from the hub router perspective, none of the devices are configired, lab ask you to  begin with a confgired DMVPN phase3 that was complete from an earlier lab
+Here from the hub router (RTR1) perspective, none of the devices are configured. This particular lab asks you to begin with a configured DMVPN phase 3 that was completed from an earlier lab. This deploy will configure the interfaces(main, loopback, tunnel), EIGRP routing, and DMVPN configuration for example.
 
 [![asciicast](https://asciinema.org/a/381759.svg)](https://asciinema.org/a/381759/?speed=2)
 
 ### Lab Destroy Example
 
-Here from a spoke router perspective, we are viewing the interface and dmpvn configuiration and the entire lab will be reset
+In the destroy phase, we will look from a spoke router(RTR2) perspective, we are viewing the interface and DMVPN configuration and the entire lab will be reset
 
 [![asciicast](https://asciinema.org/a/scOYtR7cwyICkn9ABLH0WlznI.svg)](https://asciinema.org/a/scOYtR7cwyICkn9ABLH0WlznI/?speed=2)
 
