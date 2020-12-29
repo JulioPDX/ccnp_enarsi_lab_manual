@@ -147,7 +147,26 @@ The deploy file is nothing too fancy. Its just calling out certain roles that wi
   - role: eigrp
     when: eigrp.ipv4 is defined
   - role: save_config
-# snip
+
+- name: CCNP ENARSI Lab Manual Routers
+  hosts: routers #routers
+  gather_facts: False
+  strategy: free
+  vars_files:
+    - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
+  roles:
+  - role: banner
+  - role: set_interfaces
+  - role: rtr_interfaces
+  - role: static_routes
+  - role: ospf_config
+    when: ospf is defined
+  - role: dhcp_config
+  - role: dmvpn
+    when: lab == '20_19.1.4' or lab =='22_20.1.2'
+  - role: eigrp
+    when: eigrp.ipv4 is defined
+  - role: save_config
 ```
 
 Most all of the roles for building the lab use the same structure. The task in the main.yaml file in each role kick off when certain conditions are met. To be honest, this is probably not the best way to handle this and I'm sure there's a more efficient method. Now is better than never and done is better than perfect.
