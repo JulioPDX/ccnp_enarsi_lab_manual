@@ -22,6 +22,9 @@
 - name: include reset_policy
   include: reset_policy.yaml
 
+- name: include reset_crypto
+  include: reset_crypto.yaml
+
 - name: include reset_vrf
   include: reset_vrf.yaml
 

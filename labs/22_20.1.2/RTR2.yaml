@@ -47,3 +47,15 @@ destroy:
     as:
       - DMVPN_TUNNEL_NET
       - DMVPN_TRANS_NET
+  crypto:
+    isakmp:
+      policy:
+        - name: 99
+      key:
+        - password: 'DMVPN@key#'
+          peer: 0.0.0.0
+    ipsec:
+      transform_set:
+        - name: DMVPN_TRANS
+      profile:
+        - name: DMVPN_PROFILE

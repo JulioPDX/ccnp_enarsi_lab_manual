@@ -11,7 +11,7 @@
   cisco.ios.ios_config:
     lines: no {{ item }}
   loop: "{{ static_routes_ipv4 }}"
-  when: "'MGMT' not in item"
+  when: "'MGMT' not in item and item !=''"
   ignore_errors: true
 
 - name: checking ipv6 static routes
@@ -28,5 +28,5 @@
   cisco.ios.ios_config:
     lines: no {{ item }}
   loop: "{{ static_routes_ipv6 }}"
-  when: "'MGMT' not in item and list_length | int > 1"
+  when: "'MGMT' not in item and item !=''"
   ignore_errors: true

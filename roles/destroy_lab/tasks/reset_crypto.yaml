@@ -1,0 +1,31 @@
+- name: deleting crypto ipsec profiles
+  cisco.ios.ios_config:
+    lines: no crypto ipsec profile {{ item.name }}
+  loop: "{{ destroy.crypto.ipsec.profile }}"
+  loop_control:
+    label: "ipsec profile {{ item.name }}"
+  when: destroy.crypto.ipsec.profile is defined
+
+- name: deleting crypto ipsec transform set
+  cisco.ios.ios_config:
+    lines: no crypto ipsec transform-set {{ item.name }}
+  loop: "{{ destroy.crypto.ipsec.transform_set }}"
+  loop_control:
+    label: "ipsec transform set {{ item.name }}"
+  when: destroy.crypto.ipsec.transform_set is defined
+
+- name: deleting crypto isakmp key
+  cisco.ios.ios_config:
+    lines: no crypto isakmp key {{ item.password }} address {{ item.peer}}
+  loop: "{{ destroy.crypto.isakmp.key }}"
+  loop_control:
+    label: "isakmp key {{ item.password }}"
+  when: destroy.crypto.isakmp.key is defined
+
+- name: deleting crypto isakmp policy
+  cisco.ios.ios_config:
+    lines: no crypto isakmp policy {{ item.name }}
+  loop: "{{ destroy.crypto.isakmp.policy }}"
+  loop_control:
+    label: "isakmp policy {{ item.name }}"
+  when: destroy.crypto.isakmp.policy is defined
