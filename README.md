@@ -4,7 +4,7 @@
 
 ## Purpose
 
-Hello internet! While working through the [CCNP ENARSI Lab Manual](https://www.ciscopress.com/store/ccnp-enterprise-advanced-routing-enarsi-v8-lab-manual-9780136870937), I got pretty tired of having to reset the lab and reconfigure basic IP configurations on each device. That is how this little project started. That, and my curiouisty with messing with the new Cisco IOS collection. The goal of this repo is to help me or anyone out there working through the lab manual.
+Hello Internet! While working through the [CCNP ENARSI Lab Manual](https://www.ciscopress.com/store/ccnp-enterprise-advanced-routing-enarsi-v8-lab-manual-9780136870937), I got pretty tired of having to reset the lab and reconfigure basic IP configurations on each device. That is how this little project started. That, and my curiouisty with messing with the new Cisco IOS collection. The goal of this repo is to help me or anyone out there working through the lab manual.
 
 Long story short, and this will be a long story! This repo will help build the initial configurations for each device before starting a lab. Once the user completes the lab, there is also a destroy playbook to reset the lab. Side note, this repository is not a replacement for the lab manual. It is still required to go through the labs. This is only a complimentary tool, not a replacement. One more note, I did not use any official Cisco Network Academy training so I do not have access to the troubleshooting labs in the book. Maybe I'll add some troubleshootig labs later on if this gets popular :).
 
