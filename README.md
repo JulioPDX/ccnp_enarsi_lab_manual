@@ -4,7 +4,7 @@
 
 ## Purpose
 
-Hello Internet! While working through the [CCNP ENARSI Lab Manual](https://www.ciscopress.com/store/ccnp-enterprise-advanced-routing-enarsi-v8-lab-manual-9780136870937), I got pretty tired of having to reset the lab and reconfigure basic IP configurations on each device. That is how this little project started. That, and my curiouisty with messing with the new Cisco IOS collection. The goal of this repo is to help me or anyone out there working through the lab manual.
+Hello Internet! While working through the [CCNP ENARSI Lab Manual](https://www.ciscopress.com/store/ccnp-enterprise-advanced-routing-enarsi-v8-lab-manual-9780136870937), I got pretty tired of having to reset the lab and reconfigure basic IP configurations on each device. That is how this little project started, and my curiouisty with messing with the new Cisco IOS collection. The goal of this repo is to help me or anyone out there working through the lab manual.
 
 Long story short, and this will be a long story! This repo will help build the initial configurations for each device before starting a lab. Once the user completes the lab, there is also a destroy playbook to reset the lab. Side note, this repository is not a replacement for the lab manual. It is still required to go through the labs. This is only a complimentary tool, not a replacement. One more note, I did not use any official Cisco Network Academy training so I do not have access to the troubleshooting labs in the book. Maybe I'll add some troubleshootig labs later on if this gets popular :).
 
@@ -14,10 +14,11 @@ Long story short, and this will be a long story! This repo will help build the i
 
 - IOSv Version 15.8(3)M2
 - vios L2 Version 15.2
+- VPCS built in images
 
 ### Create Topology
 
-Feel free to copy the topology I created above. Once that is done make sure each node has a connection to the same network as your Ansible control machine (light gray connections in the topology above).
+Feel free to copy the topology I created above. I also included the export under the eve_topology folder. Once that is done make sure each node has a connection to the same network as your Ansible control machine (light gray connections in the topology above).
 
 ### Node Connectivity
 
@@ -109,7 +110,7 @@ destroy:
       - CISCO
 ```
 
-The playbook will handle configuring the interfaces to match this vars file. There is also a `destroy` variable. Items defined in destroy will be removed from the devices after the user is done working through a lab. The interface that is attached to the MGMT VRF is not defined in these files for safety, if they are not included, then there is no chance the playbook or user may inadvertently reset the interface.
+The deploy playbook will handle configuring the interfaces, setting static routes, routing, banners, tunnel, loopback interfaces, and more. There is also a `destroy` variable. Items defined in destroy will be removed from the devices after the user is done working through a lab. The interface that is attached to the MGMT VRF is not defined in these files for safety, if they are not included, then there is no chance the playbook or user may inadvertently reset the interface.
 
 ### Deploying
 
