@@ -1,7 +1,9 @@
-# Getting error on this task when ACLs are None
+# Getting error on this task when executed on switches
+# May have to manually delete ACL from switches
 - name: delete all ACLs
   cisco.ios.ios_acls:
     state: deleted
+  when: "'routers' in group_names"
   ignore_errors: yes
 
 - name: delete named IPv4 prefix lists
