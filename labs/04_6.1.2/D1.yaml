@@ -1,12 +1,15 @@
 interfaces:
   - name: GigabitEthernet0/0
-    enabled: no
+    enabled: yes
+    mode: access
+    access_vlan: 1
   - name: GigabitEthernet0/1
     enabled: yes
     mode: l3
     ipv4: 10.10.0.2/29
   - name: GigabitEthernet0/2
-    enabled: no
+    enabled: yes
+    mode: trunk
   - name: GigabitEthernet1/0
     enabled: no
   - name: GigabitEthernet1/1

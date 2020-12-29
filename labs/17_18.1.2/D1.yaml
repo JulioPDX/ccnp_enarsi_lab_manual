@@ -1,6 +1,7 @@
 interfaces:
   - name: GigabitEthernet0/0
-    enabled: no
+    enabled: yes
+    mode: trunk
   - name: GigabitEthernet0/1
     enabled: yes
     mode: l3
@@ -8,7 +9,8 @@ interfaces:
     ipv6: 2001:db8:acad:1012::2/64
     link_local: fe80::d1:1
   - name: GigabitEthernet0/2
-    enabled: no
+    enabled: yes
+    mode: trunk
   - name: GigabitEthernet1/0
     enabled: no
   - name: GigabitEthernet1/1
@@ -35,6 +37,10 @@ interfaces:
     link_local: fe80::d1:2
 
 vlans:
+  - id: 5
+    name: D1
+  - id: 8
+    name: D2
   - id: 11
     name: LOCAL_VLAN
 

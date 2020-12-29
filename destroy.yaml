@@ -9,8 +9,19 @@
         fail_msg: "no lab defined, please add extra vars defining lab variable"
         # Example ansible-playbook destroy.yaml -e lab=01_2.1.2
 
-- name: Reset devices
-  hosts: cisco
+- name: reset switch layer 2 stuffs
+  hosts: switches
+  gather_facts: False
+  strategy: free
+  vars_files:
+    - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
+  roles:
+  - destroy_lab
+  - destroy_vlans
+  - reset_reload
+
+- name: Reset routers
+  hosts: routers
   gather_facts: False
   strategy: free
   vars_files:
@@ -23,13 +34,3 @@
     - name: save config before reload
       cisco.ios.ios_config:
         save_when: always
-
-- name: reset switch layer 2 stuffs
-  hosts: switches
-  gather_facts: False
-  strategy: free
-  vars_files:
-    - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
-  roles:
-  - destroy_vlans
-  - reset_reload

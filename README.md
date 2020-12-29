@@ -1,6 +1,6 @@
 # CCNP ENARSI Lab Manual v8 Ansible Configuration
 
-![](./images/topo.png)
+![Lab Topology](./images/topo.png)
 
 ## Purpose
 
@@ -23,7 +23,7 @@ Feel free to copy the topology I created above. Once that is done make sure each
 
 Once the nodes have all of their connections. The setup for all nodes is the same. Create MGMT VRF, assign management port to management VRF, and enable ssh. Below is a sample of the commands used on a Cisco device.
 
-```
+```python
 hostname RTR1
 ip domain name lab.com
 
@@ -56,7 +56,7 @@ Feel free to modify the hosts file to match whatever IP schema you choose.
 
 This guide assumes you have some machine that can run Ansible and has connectivity to your nodes.
 
-```
+```bash
 git clone https://github.com/JulioPDX/ccnp_enarsi_lab_manual.git
 cd ccnp_enarsi_lab_manual
 pip3 install -r requirements.txt
@@ -69,7 +69,7 @@ ansible-galaxy collection install cisco.ios
 
 Every lab has an individual folder for each node. This is used when running the playbook and loading in the correct variables.
 
-```
+```bash
 labs/01_2.1.2/
 ├── A1.yaml
 ├── D1.yaml
@@ -198,8 +198,19 @@ The configuration portion for the most part has pretty specific roles. Each havi
         fail_msg: "no lab defined, please add extra vars defining lab variable"
         # Example ansible-playbook destroy.yaml -e lab=01_2.1.2
 
-- name: Reset devices
-  hosts: cisco
+- name: reset switch layer 2 stuffs
+  hosts: switches
+  gather_facts: False
+  strategy: free
+  vars_files:
+    - ./labs/{{ lab }}/{{ inventory_hostname }}.yaml
+  roles:
+  - destroy_lab
+  - destroy_vlans
+  - reset_reload
+
+- name: Reset routers
+  hosts: routers
   gather_facts: False
   strategy: free
   vars_files:
@@ -207,6 +218,11 @@ The configuration portion for the most part has pretty specific roles. Each havi
   roles:
   - destroy_lab
   # - reset_reload # Not working for IOSv Routers
+
+  tasks:
+    - name: save config before reload
+      cisco.ios.ios_config:
+        save_when: always
 ```
 
 In the second playbook above, there is only one role called. But in actuality it is calling many reset files. This was mainly done for my sanity as the number of roles kept growing. I tried to make the destroy portion one small role... but that ended up growing either way. Anywho, below is a snip of the main.yaml file in the destroy_lab role.
@@ -286,6 +302,17 @@ Below is the reset_routing task file that is called from the main.yaml file abov
 ## Lab workflow
 
 When creating this I worked through the book from front to back. Build lab, work through lab, and destroy lab once complete. The way this project was structured you can jump around between labs. As long as you reset the lab before moving on to the next.
+
+### Lab Deploy Example
+Here from the hub router perspective, none of the devices are configired, lab ask you to  begin with a confgired DMVPN phase3 that was complete from an earlier lab
+
+[![asciicast](https://asciinema.org/a/381759.svg)](https://asciinema.org/a/381759/?speed=2)
+
+### Lab Destroy Example
+
+Here from a spoke router perspective, we are viewing the interface and dmpvn configuiration and the entire lab will be reset
+
+[![asciicast](https://asciinema.org/a/scOYtR7cwyICkn9ABLH0WlznI.svg)](https://asciinema.org/a/scOYtR7cwyICkn9ABLH0WlznI/?speed=2)
 
 ## Caveats
 

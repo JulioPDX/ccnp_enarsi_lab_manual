@@ -4,7 +4,8 @@ interfaces:
     mode: access
     access_vlan: 1
   - name: GigabitEthernet0/1
-    enabled: no
+    enabled: yes
+    mode: trunk
   - name: GigabitEthernet0/2
     enabled: yes
     mode: access
@@ -16,6 +17,4 @@ interfaces:
   - name: GigabitEthernet1/1
     enabled: no
   - name: GigabitEthernet1/3
-    enabled: yes
-    mode: access
-    access_vlan: 1
+    enabled: no

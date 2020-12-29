@@ -1,7 +1,7 @@
 - name: configure ipv4 static routes
   cisco.ios.ios_config:
     lines:
-    - ip route {{ item.dest | ansible.netcommon.ipaddr('network') }} {{ item.dest | ansible.netcommon.ipaddr('netmask') }} {{ item.next_hop_address | default() }} {{ item.next_hop_interface | default() }}
+    - ip route {{ item.dest | ansible.netcommon.ipaddr('network') }} {{ item.dest | ansible.netcommon.ipaddr('netmask') }} {{ item.next_hop_interface | default() }} {{ item.next_hop_address | default() }}
   loop: "{{ static_routes_ipv4 }}"
   loop_control:
     label: "Static route to {{ item.dest }}"

@@ -5,9 +5,9 @@ interfaces:
     sub_int: False
   - name: GigabitEthernet0/1
     sub_int: False
+    ipv4: 10.10.0.1/29
   - name: GigabitEthernet0/2
     sub_int: False
-    ipv4: 10.10.0.1/29
   - name: Loopback0
     sub_int: False
     ipv4: 209.165.200.225/27
