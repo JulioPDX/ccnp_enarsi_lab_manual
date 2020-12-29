@@ -331,7 +331,7 @@ Here from the hub router (RTR1) perspective, none of the devices are configured.
 
 ### Lab Destroy Example
 
-In the destroy phase, we will look from a spoke router(RTR2) perspective, we are viewing the interface and DMVPN configuration and the entire lab will be reset
+In the destroy phase, we will look from a spoke router(RTR2) perspective. We are viewing the interface, DMVPN configuration, and the entire lab will be reset
 
 [![asciicast](https://asciinema.org/a/scOYtR7cwyICkn9ABLH0WlznI.svg)](https://asciinema.org/a/scOYtR7cwyICkn9ABLH0WlznI/?speed=2)
 
