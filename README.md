@@ -304,6 +304,7 @@ Below is the reset_routing task file that is called from the main.yaml file abov
 When creating this I worked through the book from front to back. Build lab, work through lab, and destroy lab once complete. The way this project was structured you can jump around between labs. As long as you reset the lab before moving on to the next.
 
 ### Lab Deploy Example
+
 Here from the hub router perspective, none of the devices are configired, lab ask you to  begin with a confgired DMVPN phase3 that was complete from an earlier lab
 
 [![asciicast](https://asciinema.org/a/381759.svg)](https://asciinema.org/a/381759/?speed=2)
