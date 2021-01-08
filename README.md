@@ -18,7 +18,7 @@ Long story short, and this will be a long story! This repo will help build the i
 
 ### Create Topology
 
-Feel free to copy the topology I created above. I also included the export under the eve_topology folder. Once that is done make sure each node has a connection to the same network as your Ansible control machine (light gray connections in the topology above).
+Feel free to copy the topology I created above. I also included the export under the eve_topology folder. Once that is done make sure each node has a connection to the same network as your Ansible control machine (light gray connections in the topology above). Please note, this topology can be created using GNS3 or CML. Topology links would have to match or many updates would be required in vars files.
 
 ### Node Connectivity
 
