@@ -1,5 +1,5 @@
 wheel
-ansible==2.9
+ansible==2.9.18
 paramiko
 ansible-pylibssh
 netaddr
